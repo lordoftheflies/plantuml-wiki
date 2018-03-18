@@ -1,0 +1,62 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+**TITLE**: Foire Aux Questions sur l'installation
+
+**DESC**: This pages lists some very common questions about the installation of PlantUML. Please read it first before sending us mail or asking your question on the forum.
+
+====== Procédure d'installation ======
+
+===== Diagramme de séquence =====
+
+Pour commencer, vous devez faire fonctionner les **diagrammes de séquence**. Même si ceux-ci ne vous intéressent pas particulièrement, il est plus facile de commencer avec eux, parce qu'ils n'ont pas besoin de Graphviz pour être générés. Et si les diagrammes de séquence ne fonctionnent pas, __les autres diagrammes ne fonctionneront probablement pas non plus__.
+
+Il s'agit donc de tester les **diagrammes de séquence** avec la ligne de commande (et non pas avec un autre outil que vous auriez l'intention d'utiliser - Eclipse, Word, Mediawiki...):
+
+    java -jar plantuml.jar -verbose sequenceDiagram.txt
+
+Le fichier ''sequenceDiagram.txt'' doit contenir un test très simple:
+
+    @startuml
+    Alice -> Bob: test
+    @enduml
+
+L'option ''-verbose'' permet de générer des traces supplémentaires qui nous seront utiles si d'aventure aucune image n'était générée par la commande précédente.
+
+Sous Unix, vous devez avoir les librairies X11 installées (ce qui est généralement le cas). Si ce n'est pas le cas, vous risquez d'avoir une [[http://www.oracle.com/technetwork/articles/javase/headless-136834.html|erreur HeadlessException]].
+Dans ce cas, vous pourriez avoir à rajouter l'option ''-Djava.awt.headless=true'' dans [[command-line|la ligne de commande]]. 
+
+Si l'image est bien générée, mais que cela ne fonctionne pas dans votre outil intégrant PlantUML, il s'agit probablement d'une erreur spécifique à votre outil.
+
+Sous MediaWiki et Windows, vous devez donner les droits de lecture et d'exécution à ''C:\Windows\system32\cmd.exe'' pour le compte qui fait tourner le Service Web PHP. PHP a besoin de ces permissions pour lancer d'autres processus.
+
+
+===== Autres type de diagrammes =====
+
+Une fois que les diagrammes de séquence fonctionnent correctement, vous pouvez vous intéresser aux autres types de diagrammes.
+
+Si Graphviz n'est pas disponible sur votre système, vous [[graphviz-dot|devez commencer par l'installer]].
+
+Sous Linux, essayer de lancer la commande ''dot'' dans une ligne de commande shell. //Il est possible// que vous ayez à finaliser l'installation en tapant ''dot -C''.
+
+[[graphviz-dot|Vous devriez aussi peut-être régler la variable GRAPHVIZ_DOT]] si Graphviz n'est pas installé dans son répertoire par défaut.
+
+Pour tester l'installation de Graphviz, vous pouvez utiliser la ligne de commande suivante:
+    java -jar plantuml.jar -testdot
+
+Vous pouvez aussi utiliser le diagramme spécial suivant:
+
+    @startuml
+    testdot
+    @enduml
+
+Là encore, vous pouvez utiliser l'option ''-verbose'' dans la ligne de commande:
+
+    java -jar plantuml.jar -verbose classDiagram.txt
+
+Le fichier ''classDiagram.txt'' peut être très simple:
+
+    @startuml
+    A <|-- B
+    @enduml
+
+Si cela ne fonctionne toujours pas, [[mailto:plantuml@gmail.com|vous pouvez nous envoyer un email]].

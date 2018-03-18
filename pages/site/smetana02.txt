@@ -1,0 +1,60 @@
+<nodisp>TITLE: Porting Graphviz To Java</nodisp>
+<nodisp>DESC: Some work has been started to port GraphViz to Java so that you can run PlantUML without having to install GraphViz first.</nodisp>
+
+
+===== The context =====
+PlantUML uses Graphviz/DOT to compute node positionning for every UML diagrams (except Sequence Diagrams and Activity Beta Diagrams).
+The fact that DOT computes automatically the position of node is a key feature, and algorithms implemented in
+DOT usually give very good result.
+
+However, there are some drawbacks of using DOT :
+the computation is done by an external program (dot.exe on Windows, dot on linux), and that means that :
+
+  *     PlantUML has to create a new process for each diagram, (and communication with this new process could be source of bugs).
+  *     Users have to install DOT on their system, in addition of Java.
+  *     PlantUML is not fully portable. 
+
+Another way of using DOT would be to use it as a library, and to link it with PlantUML using JNI
+(Java Native Interface) but that would not be perfect thought.
+
+
+If a Java version of Graphviz/DOT would exist, this would allow to greatly simplify the installation and the use of PlantUML.
+So we have started a port from C to Java of GraphViz/DOT source code: see [[https://github.com/plantuml/smetana|Smetana project]]
+
+===== Alpha version =====
+
+Smetana code has been integrated into PlantUML, so you can use the ''!pragma graphviz_dot jdot'' directive
+to force PlantUML to use the internal Java port of GraphViz/Dot, instead of the regular dot process.
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+!pragma graphviz_dot jdot
+class Foo1
+
+Foo1 --> Foo2
+Foo1 --> Foo3
+Foo1 ---> Foo4 : test 4
+Foo1 ----> Foo5 : test 5
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!pragma graphviz_dot jdot
+class Foo1
+
+Foo1 --> Foo2
+Foo1 --> Foo3
+Foo1 ---> Foo4 : test 4
+Foo1 ----> Foo5 : test 5
+
+</uml>
+</columns>
+
+As you can see, some feature are not implemented yet (drawing of arrow heads, for example).
+
+Performance is not very good, but this is only an alpha version.
+
+**The key point is that this image has been generated without launching Graphviz/DOT!**

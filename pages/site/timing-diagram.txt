@@ -1,0 +1,354 @@
+**TITLE**: Timing Diagram syntax and features
+
+**DESC**: PlantUML Gantt diagram syntax: Gantt diagrams are not fully supported within PlantUML. This is a draft version of the language can be subject to changes.
+
+
+====== Timing Diagram ======
+
+__This is only a proposal and subject to change__.
+
+You are very welcome to create a new discussion on this future syntax. Your feedbacks, ideas and suggestions help us to find the right solution.
+
+===== Declaring participant =====
+
+You declare participant using ''concise'' or ''robust'' keyword, depending on how you want them to be drawn.
+
+You define state change using the ''@'' notation, and the ''is'' verb.
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+</uml>
+</columns>
+
+===== Adding message =====
+
+You can add message using the following syntax.
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU -> WB : URL
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU -> WB : URL
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+</uml>
+</columns>
+
+===== Relative time =====
+
+It is possible to use relative time with ''@''.
+<columns 100% 50% ->
+<code>
+@startuml
+robust "DNS Resolver" as DNS
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+DNS is Idle
+
+@+100
+WU -> WB : URL
+WU is Waiting
+WB is Processing
+
+@+200
+WB is Waiting
+WB -> DNS@+50 : Resolve URL
+
+@+100
+DNS is Processing
+
+@+300
+DNS is Idle
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "DNS Resolver" as DNS
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+DNS is Idle
+
+@+100
+WU -> WB : URL
+WU is Waiting
+WB is Processing
+
+@+200
+WB is Waiting
+WB -> DNS@+50 : Resolve URL
+
+@+100
+DNS is Processing
+
+@+300
+DNS is Idle
+</uml>
+</columns>
+
+===== Participant oriented =====
+
+Rather than declare the diagram in chronological order, you can define it by participant. 
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@WB
+0 is idle
++200 is Proc.
++100 is Waiting
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@WB
+0 is idle
++200 is Proc.
++100 is Waiting
+
+@WU
+0 is Waiting
++500 is ok
+</uml>
+</columns>
+
+===== Setting scale =====
+You can also set a specific scale.
+<columns 100% 50% ->
+<code>
+@startuml
+concise "Web User" as WU
+scale 100 as 50 pixels
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+concise "Web User" as WU
+scale 100 as 50 pixels
+
+@WU
+0 is Waiting
++500 is ok
+</uml>
+</columns>
+
+===== Initial state =====
+You can also define an inital state. 
+<columns 100% 50% ->
+<code>
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+WB is Initializing
+WU is Absent
+
+@WB
+0 is idle
++200 is Processing
++100 is Waiting
+
+@WU
+0 is Waiting
++500 is ok
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+WB is Initializing
+WU is Absent
+
+@WB
+0 is idle
++200 is Processing
++100 is Waiting
+
+@WU
+0 is Waiting
++500 is ok
+</uml>
+</columns>
+
+===== Adding constraint =====
+It is possible to display time constraints on the diagrams. 
+<columns 100% 50% ->
+<code>
+@startuml
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+WB is Initializing
+WU is Absent
+
+@WB
+0 is idle
++200 is Processing
++100 is Waiting
+WB@0 <-> @50 : {50 ms lag}
+
+@WU
+0 is Waiting
++500 is ok
+@200 <-> @+150 : {150 ms}
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+WB is Initializing
+WU is Absent
+
+@WB
+0 is idle
++200 is Processing
++100 is Waiting
+WB@0 <-> @50 : {50 ms lag}
+
+@WU
+0 is Waiting
++500 is ok
+@200 <-> @+150 : {150 ms}
+</uml>
+</columns>
+
+===== Adding texts =====
+
+You can optionally add a title, a header, a footer, a legend and a caption:
+
+<columns 100% 50% ->
+<code>
+@startuml
+Title this is my title
+header: some header
+footer: some footer
+legend
+Some legend
+end legend
+caption some caption
+
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+Title Some title
+header: Some header
+footer: Some footer
+legend
+Some legend
+end legend
+caption Some caption
+
+robust "Web Browser" as WB
+concise "Web User" as WU
+
+@0
+WU is Idle
+WB is Idle
+
+@100
+WU is Waiting
+WB is Processing
+
+@300
+WB is Waiting
+</uml>
+</columns>

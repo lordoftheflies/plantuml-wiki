@@ -1,0 +1,51 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: 开源工具，使用简单的文字描述画UML图。</nodisp>
+<nodisp>DESC: 轻松从简单的文字说明创建UML图。也有许多种可用的图表。它也可以在PNG，乳胶，EPS，SVG图像导出。</nodisp>
+
+====== PlantUML in a nutshell ======
+
+**PlantUML**是一个开源项目，支持快速绘制：
+
+  * [[sequence-diagram|时序图]]
+  * [[use-case-diagram|用例图]]
+  * [[class-diagram|类图]]
+  * [[activity-diagram-beta|活动图]] (here is [[activity-diagram-legacy|the legacy syntax)]]
+  * [[component-diagram|组件图]]
+  * [[state-diagram|状态图]]
+  * [[object-diagram|对象图]]
+  * [[deployment-diagram|部署图]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|Timing diagram]] {{:site:beta-icon.gif?nolink|}}
+
+同时还支持以下非UML图:
+
+  * [[salt|Wireframe graphical interface]]
+  * [[archimate-diagram|架构图]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|Ditaa diagram]]
+  * [[gantt-diagram|甘特图]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|Mathematic with AsciiMath or JLaTeXMath notation]]
+
+通过简单直观的语言来定义这些示意图。 ([[http://translate.plantuml.com/zh/PlantUML_Language_Reference_Guide_ZH.pdf|语言参考指南]]).
+
+New users can read the [[starting|quick start page]]. There is also a [[faq|F.A.Q. page]]. PlantUML can be used within [[running|many other tools]].
+
+可以生成PNG, [[svg|SVG]] 或 [[latex|LaTeX]] 格式的图片. 也可以生成 [[ascii-art|ASCII艺术图]] (只针对时序图).
+
+----
+
+**# 在线生产数 :**
+  * 历史 //4242424242//
+  * 最近24小时 //42424242//
+  * 最近1小时 //4242//
+  * 最近1分钟 //42//
+
+^ __例子__: \\  //(输入你的内容后，图表会动态刷新!)// ^ __describes the following diagram :__^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+This example is working thanks to the [[http://www.plantuml.com/plantuml|online demo server]].
+
+----
+
+//您可以点击此处在此页面上做出贡献。//
+

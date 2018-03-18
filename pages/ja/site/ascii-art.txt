@@ -1,0 +1,299 @@
+FIXME **このページは、まだ完全に翻訳されていません！！よろしければ、翻訳作業を手伝って下さい！！**\\ //（翻訳が完了したら、この段落は削除してください。）//
+
+<nodisp>TITLE: UMLをアスキーアートで出力する</nodisp>
+<nodisp>DESC: ASCII アートは、ASCII 文字のみを用いてダイアグラムを表現します。プレーンテキストのみで生成したダイアグラムは、ソースコードに含めたい場合に使い勝手が良いでしょう。</nodisp>
+
+====== アスキーアート ======
+[[sequence-diagram|シーケンス図]]を[[https://ja.wikipedia.org/wiki/アスキーアート|アスキーアート]]で出力することができます。
+
+<code>
+@startuml
+participant Bob
+actor Alice
+ 
+Bob -> Alice : hello
+Alice -> Bob : Is it ok?
+@enduml
+</code>
+
+コマンドを実行するときに''-txt''フラグを付けるか、[[ant-task|ANT タスク]]で''format''タグを付ける必要があります。
+
+<code>
+<target name="main">
+  <plantuml dir="./src" format="txt" />
+</target>
+</code>
+
+コマンドを実行すると、 .atxt という拡張子のファイルが作成されます。
+
+実行結果の例
+
+<code>
+                      ,-.  
+                      `-'  
+                      /|\  
+     ,---.             |   
+     |Bob|            / \  
+     `-+-'           Alice 
+       |    hello      |   
+       |-------------->|   
+       |               |   
+       |  Is it ok?    |   
+       |<- - - - - - - |   
+     ,-+-.           Alice 
+     |Bob|            ,-.  
+     `---'            `-'  
+                      /|\  
+                       |   
+                      / \  
+</code>
+
+====== Unicode ======
+
+デフォルトのままだと、''txt''では[[https://ja.wikipedia.org/wiki/ASCII#ASCII.E5.8D.B0.E5.AD.97.E5.8F.AF.E8.83.BD.E6.96.87.E5.AD.97|ASCII文字]]しか使用することができません。
+ユニコードで使用できる文字を使えるようにすることで、多少マシな結果が出力されるようになります。そのためには、コマンドを実行するときのフラグを''-utxt''にするか、[[ant-task|ANT タスク]]のフォーマットタグで''utxt''を指定する必要があります。
+
+<code>
+                      ┌─┐  
+                      ║"│  
+                      └┬┘  
+                      ┌┼┐  
+     ┌───┐             │   
+     │Bob│            ┌┴┐  
+     └─┬─┘           Alice 
+       │    hello      │   
+       │──────────────>│   
+       │               │   
+       │  Is it ok?    │   
+       │<─ ─ ─ ─ ─ ─ ─ │   
+     ┌─┴─┐           Alice 
+     │Bob│            ┌─┐  
+     └───┘            ║"│  
+                      └┬┘  
+                      ┌┼┐  
+                       │   
+                      ┌┴┐  
+</code>
+
+''utxt''を使う上では、以下のような問題点があります。
+
+  * 出力がUTF-8になるということ自体が問題になることがあります。（mail gateway や 使用するエディター など）
+  * 使っているフォントが、UTF-8に対応している必要があります。（Courier など）
+
+====== 複雑な例 ======
+
+複雑な例を試してみましょう。
+
+FIXME: 実際に日本語を使用して作ったシーケンス図を作成し、実際に出力して、それに置き換える; generate diagram whome use Japanese Characters, and replace to it.
+
+<code>
+@startuml
+'hide footbox
+
+participant "Bob on\nseveral lines" as Bob
+actor Alice
+
+Bob -> Alice : hello
+note right of Alice
+  this is a note
+end note
+
+Alice -> Bob : Is it ok\nwith a message that is\non several lines?
+
+note right
+  This other note
+  should work
+  on several lines
+end note
+
+== This is a separation ==
+
+Bob -> Last : Yes it works!
+Last -> Last : working in progress
+note left : this is\nanother note
+
+Last --> Last : working in progress
+
+Last --> Bob : done
+
+opt dummy comment
+  Bob -> Last : Error\nOn\nSeveral\nLine
+  Last --> Bob : None
+else
+  Last --> Bob : None
+  Last -> Bob : None
+else other
+  Last -> Bob : None
+  note over Alice, Last
+    This is a long note
+    over Alice and Last
+  end note
+  Last -> Bob : None
+  Last -> Bob : None
+end
+@enduml
+</code>
+
+===== Result =====
+
+<code>
+                                             ,-.                                                   
+                                             `-'                                                   
+               ,-------------.               /|\                                                   
+               |Bob on       |                |             ,----.                                 
+               |several lines|               / \            |Last|                                 
+               `------+------'              Alice           `-+--'                                 
+                      |        hello          |               |                                    
+                      |---------------------->|               |                                    
+                      |                       |               |                                    
+                      |                       | ,--------------!.                                  
+                      |                       | |this is a note|_\                                 
+                      |                       | `----------------'                                 
+                      |Is it ok               | ,----------------!.                                
+                      |with a message that is | |This other note |_\                               
+                      |on several lines?      | |should work       |                               
+                      |<----------------------| |on several lines  |                               
+                      |                       | `------------------'                               
+                      |                       |               |                                    
+                      |              ======================== |                                    
+====================================== This is a separation =======================================
+                      |              ======================== |                                    
+                      |                       |               |                                    
+                      |            Yes it works!              |                                    
+                      |-------------------------------------->|                                    
+                      |                       |               |                                    
+                      |                       ,------------!. |----.                               
+                      |                       |this is     |_\|    | working in progress           
+                      |                       |another note  ||<---'                               
+                      |                       `--------------'|                                    
+                      |                       |               |- - .                               
+                      |                       |               |    | working in progress           
+                      |                       |               |< - '                               
+                      |                       |               |                                    
+                      |                 done  |               |                                    
+                      |<- - - - - - - - - - - - - - - - - - - |                                    
+                      |                       |               |                                    
+     ______________________________________________________________________                        
+     ! OPT  /  dummy comment                  |               |            !                       
+     !_____/          |                       |               |            !                       
+     !                |                       |               |            !                       
+     !                |               Error   |               |            !                       
+     !                |               On      |               |            !                       
+     !                |               Several |               |            !                       
+     !                |               Line    |               |            !                       
+     !                |-------------------------------------->|            !                       
+     !                |                       |               |            !                       
+     !                |                 None  |               |            !                       
+     !                |<- - - - - - - - - - - - - - - - - - - |            !                       
+     !~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!                       
+     !                |                       |               |            !                       
+     !                |                 None  |               |            !                       
+     !                |<- - - - - - - - - - - - - - - - - - - |            !                       
+     !                |                       |               |            !                       
+     !                |                 None  |               |            !                       
+     !                |<--------------------------------------|            !                       
+     !~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!                       
+     ! [other]        |                       |               |            !                       
+     !                |                 None  |               |            !                       
+     !                |<--------------------------------------|            !                       
+     !                |                       |               |            !                       
+     !                |                    ,-------------------!.          !                       
+     !                |                    |This is a long note|_\         !                       
+     !                |                    |over Alice and Last  |         !                       
+     !                |                    `---------------------'         !                       
+     !                |                 None  |               |            !                       
+     !                |<--------------------------------------|            !                       
+     !                |                       |               |            !                       
+     !                |                 None  |               |            !                       
+     !                |<--------------------------------------|            !                       
+     !~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!                       
+               ,------+------.              Alice           ,-+--.                                 
+               |Bob on       |               ,-.            |Last|                                 
+               |several lines|               `-'            `----'                                 
+               `-------------'               /|\                                                   
+                                              |                                                    
+                                             / \                                                  
+</code>
+
+===== Same example using Unicode =====
+
+<code>
+                                             ┌─┐                                                   
+                                             ║"│                                                   
+                                             └┬┘                                                   
+               ┌─────────────┐               ┌┼┐                                                   
+               │Bob on       │                │             ┌────┐                                 
+               │several lines│               ┌┴┐            │Last│                                 
+               └──────┬──────┘              Alice           └─┬──┘                                 
+                      │        hello          │               │                                    
+                      │──────────────────────>│               │                                    
+                      │                       │               │                                    
+                      │                       │ ╔═════════════╧══╗                                 
+                      │                       │ ║this is a note ░║                                 
+                      │                       │ ╚═════════════╤══╝                                 
+                      │Is it ok               │ ╔═════════════╧════╗                               
+                      │with a message that is │ ║This other note  ░║                               
+                      │on several lines?      │ ║should work       ║                               
+                      │<──────────────────────│ ║on several lines  ║                               
+                      │                       │ ╚═════════════╤════╝                               
+                      │                       │               │                                    
+                      │              ╔════════╧═════════════╗ │                                    
+══════════════════════╪══════════════╣ This is a separation ╠═╪════════════════════════════════════
+                      │              ╚════════╤═════════════╝ │                                    
+                      │                       │               │                                    
+                      │            Yes it works!              │                                    
+                      │──────────────────────────────────────>│                                    
+                      │                       │               │                                    
+                      │                       ╔══════════════╗│────┐                               
+                      │                       ║this is      ░║│    │ working in progress           
+                      │                       ║another note  ║│<───┘                               
+                      │                       ╚══════════════╝│                                    
+                      │                       │               │─ ─ ┐                               
+                      │                       │               │    | working in progress           
+                      │                       │               │< ─ ┘                               
+                      │                       │               │                                    
+                      │                 done  │               │                                    
+                      │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │                                    
+                      │                       │               │                                    
+     ╔══════╤═════════╪═══════════════════════╪═══════════════╪════════════╗                       
+     ║ OPT  │  dummy comment                  │               │            ║                       
+     ╟──────┘         │                       │               │            ║                       
+     ║                │                       │               │            ║                       
+     ║                │               Error   │               │            ║                       
+     ║                │               On      │               │            ║                       
+     ║                │               Several │               │            ║                       
+     ║                │               Line    │               │            ║                       
+     ║                │──────────────────────────────────────>│            ║                       
+     ║                │                       │               │            ║                       
+     ║                │                 None  │               │            ║                       
+     ║                │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │            ║                       
+     ╠════════════════╪═══════════════════════╪═══════════════╪════════════╣                       
+     ║                │                       │               │            ║                       
+     ║                │                 None  │               │            ║                       
+     ║                │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │            ║                       
+     ║                │                       │               │            ║                       
+     ║                │                 None  │               │            ║                       
+     ║                │<──────────────────────────────────────│            ║                       
+     ╠════════════════╪═══════════════════════╪═══════════════╪════════════╣                       
+     ║ [other]        │                       │               │            ║                       
+     ║                │                 None  │               │            ║                       
+     ║                │<──────────────────────────────────────│            ║                       
+     ║                │                       │               │            ║                       
+     ║                │                    ╔══╧═══════════════╧══╗         ║                       
+     ║                │                    ║This is a long note ░║         ║                       
+     ║                │                    ║over Alice and Last  ║         ║                       
+     ║                │                    ╚══╤═══════════════╤══╝         ║                       
+     ║                │                 None  │               │            ║                       
+     ║                │<──────────────────────────────────────│            ║                       
+     ║                │                       │               │            ║                       
+     ║                │                 None  │               │            ║                       
+     ║                │<──────────────────────────────────────│            ║                       
+     ╚════════════════╪═══════════════════════╪═══════════════╪════════════╝                       
+               ┌──────┴──────┐              Alice           ┌─┴──┐                                 
+               │Bob on       │               ┌─┐            │Last│                                 
+               │several lines│               ║"│            └────┘                                 
+               └─────────────┘               └┬┘                                                   
+                                             ┌┼┐                                                   
+                                              │                                                    
+                                             ┌┴┐                                                   
+</code>

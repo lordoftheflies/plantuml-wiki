@@ -1,0 +1,72 @@
+<nodisp>TITLE: Draft with handwritten diagram</nodisp>
+<nodisp>DESC: It is possible to generate handwritten diagrams. This is useful to emphasize the fact that your diagrams are still under work.</nodisp>
+
+To emphasize the fact that your diagrams are still under work, you can generate handwritten diagrams.
+
+You have to set ''handwritten'' skinparam to ''true'' to do so.
+
+===== Examples =====
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam handwritten true
+Alice -> Bob : hello
+note right: Not validated yet
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam handwritten true
+Alice -> Bob : hello
+note right: Not validated yet
+</uml>
+</columns>
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam handwritten true
+class Object
+class String extends Object
+class Date extends Object
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam handwritten true
+class Object
+class String extends Object
+class Date extends Object
+</uml>
+</columns>
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam handwritten true
+start
+if (Graphviz installed?) then (yes)
+  :process all\ndiagrams;
+else (no)
+  :process only
+  __sequence__ and __activity__ diagrams;
+endif
+stop
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam handwritten true
+start
+if (Graphviz installed?) then (yes)
+  :process all\ndiagrams;
+else (no)
+  :process only
+  __sequence__ and __activity__ diagrams;
+endif
+stop
+</uml>
+</columns>
+

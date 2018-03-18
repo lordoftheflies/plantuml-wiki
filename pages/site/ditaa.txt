@@ -1,0 +1,124 @@
+<nodisp>TITLE: Integration of Ditaa</nodisp>
+<nodisp>DESC: Ditaa is an utility written in Java, that can convert diagrams drawn using ascii art. Ditaa syntax has been integrated into PlantUML, so that you can have Ditaa diagrams from PlantUML.</nodisp>
+
+===== Generalisation =====
+
+Initially, diagrams descriptions have to start with ''@startuml'' and to finish with ''@enduml''. **PlantUML** allows now to generate other diagrams than UML, and in that cases, ''@startuml'' would not make sense anymore.
+
+So, the general convention is to let diagrams descriptions start with ''@startXXX'' and to finish with ''@endXXX'', where ''XXX'' has to be changed with the type of diagrams.
+
+Note that ''XXX'' could be any strings of characters (including spaces).
+
+> This means that plugin developers are encouraged to change their code to recognize ''@start'' instead of ''@startuml''.
+
+===== Ditaa =====
+
+[[http://ditaa.sourceforge.net|Ditaa]] is an Open Source project that allows to generate general diagrams from a text descriptions. The idea is close to **PlantUML**, and it may be useful for documentation to generate other diagrams than UML.
+
+So last version of **PlantUML** allows this : 
+
+
+
+<columns 100% 50% ->
+<code>
+@startditaa
++--------+   +-------+    +-------+
+|        +---+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+    :                         ^
+    |       Lots of work      |
+    +-------------------------+
+@endditaa
+</code>
+<newcolumn>
+<uml>
+ditaa
++--------+   +-------+    +-------+
+|        +---+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+    :                         ^
+    |       Lots of work      |
+    +-------------------------+
+</uml>
+</columns>
+
+You will find [[http://ditaa.sourceforge.net|here]] the complete documentation about this.
+
+If your plugin does not support ''@startditaa'' yet, a //temporary// feature has been set up : it is also possible to use [[http://ditaa.sourceforge.net|Ditaa]] with ''@startuml'' by using ''ditaa'' keyword on the very first line of your description.
+
+You can also use some option, after the ''@startditaa'' or ''@ditaa'' keyword:
+
+  * ''-E'' or ''--no-separation'' to remove separator
+  * ''-S'' or ''--no-shadows'' to remove shadow
+  * ''scale=XXX'' to scale up or down the diagram
+
+<columns 100% 50% ->
+<code>
+@startuml
+ditaa(--no-shadows, scale=0.8)
+/--------\   +-------+
+|cAAA    +---+Version|
+|  Data  |   |   V3  |
+|  Base  |   |cRED{d}|
+|     {s}|   +-------+
+\---+----/
+@enduml
+</code>
+<newcolumn>
+<uml>
+ditaa(--no-shadows, scale=0.8)
+/--------\   +-------+
+|cAAA    +---+Version|
+|  Data  |   |   V3  |
+|  Base  |   |cRED{d}|
+|     {s}|   +-------+
+\---+----/
+</uml>
+</columns>
+
+Only PNG generation is supported.
+
+===== DOT =====
+
+Since **PlantUML** uses [[http://www.graphviz.org/Gallery.php|Graphviz/DOT]], it is possible to directly use DOT language.
+This means that you can use Graphviz/DOT with all tools that support **PlantUML**.
+
+Note that the very first line has to be:
+
+    digraph XXXX {
+
+Note that you can also use ''@startuml''/''@enduml'' instead of ''@startdot''/''@enddot''.
+Here is a working example: 
+
+<columns 100% 50% ->
+<code>
+@startdot
+digraph foo {
+  node [style=rounded]
+  node1 [shape=box]
+  node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
+  node3 [shape=record, label="{ a | b | c }"]
+
+  node1 -> node2 -> node3
+}
+@enddot
+</code>
+<newcolumn>
+<uml>
+digraph foo {
+  node [style=rounded]
+  node1 [shape=box]
+  node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
+  node3 [shape=record, label="{ a | b | c }"]
+
+  node1 -> node2 -> node3
+}
+</uml>
+</columns>
+    

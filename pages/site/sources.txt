@@ -1,0 +1,43 @@
+<nodisp>TITLE: Embedded diagrams into source code</nodisp>
+<nodisp>DESC: It is possible to embed PlantUML text diagram into any programming language source code. Just put your diagrams into comments with @startuml and @enduml.</nodisp>
+
+
+====== How and where diagrams can be written ======
+Each diagram description begins with the keyword ''@startuml''
+then ends with the keyword ''@enduml''.
+
+You can refer to [[http://sourceforge.net/projects/plantuml/files/PlantUML%20Language%20Reference%20Guide.pdf/download|the PlantUML Language Reference Guide]].
+
+Those descriptions may be included into :
+  * 	Text files (**.txt**),
+  * 	Html files (**.html** or **.htm**),
+  * 	[[javadoc|Java sources files]] (**.java**),
+  * 	C/C++ source files (**.c**, **.h**, **.cpp**)
+  * 	LaTeX sources files (**.tex**),
+  * 	[[http://maven.apache.org/doxia/references/apt-format.html|APT files(.apt)]]
+  * 	[[word|Word files(**.doc**)]]
+  * 	[[server|URL]]
+
+
+Of course, if you use Html, LaTeX, APT or Java/C/C++ files, you should put
+diagram descriptions into comments.
+
+===== File naming =====
+
+By default, ''.png'' file have the same name as the source file used to generated them (only the extension changes).
+
+An automatic sequence is added if a source file contains several instances of ''@startXXX''.
+
+It is possible to use a different file name for the generated file. For example:
+
+<code>
+@startuml image.png
+Alice->Bob: Authentication Request
+Bob-->Alice: Authentication Response
+@enduml
+</code>
+
+In this example, the ''.png'' file will be named ''image.png''.
+
+(Please note that you should not use this feature with //Word// integration.)
+

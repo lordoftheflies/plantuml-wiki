@@ -1,0 +1,51 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Open-source tool that uses simple textual descriptions to draw UML diagrams.</nodisp>
+<nodisp>DESC: Easily create UML Diagrams from simple textual description. There are also numerous kind of available diagrams. It's also possible to export images in PNG, LaTeX, EPS, SVG.</nodisp>
+
+====== PlantUML in a nutshell ======
+
+**PlantUML** é um projeto Open Source que permite escrever rapidamente:
+
+  * [[sequence-diagram|Diagrama de Sequência]]
+  * [[use-case-diagram|Diagrama de Casos de uso]]
+  * [[class-diagram|Diagrama de Classes]]
+  * [[activity-diagram-beta|Diagrama de Atividades]] (esta é a [[activity-diagram-legacy|sintaxe legada)]]
+  * [[component-diagram|Diagrama de Componentes]]
+  * [[state-diagram|Diagrama de Estado]]
+  * [[object-diagram|Diagrama de Objetos]]
+  * [[deployment-diagram|Diagrama de Deployment]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|Diagrama de Tempo]] {{:site:beta-icon.gif?nolink|}}
+
+Os diagramas não UML seguintes também são suportados:
+
+  * [[salt|Interface gráfica (Wireframe)]]
+  * [[archimate-diagram|Diagrama Archimate]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|Diagrama Ditaa]]
+  * [[gantt-diagram|Diagrama de Gantt]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|Matemática com notação AsciiMath ou JLaTeXMath]]
+
+Diagramas são definidos usando uma linguagem simples e intuitiva. ([[http://translate.plantuml.com/pt/PlantUML_Language_Reference_Guide_PT.pdf|ver Guia de Referência da linguagem PlantUML]]).
+
+Novos usuários podem ler o [[starting|quick start page]]. Há ainda a [[faq|página de perguntas frequentes (FAQ)]]. PlantUML pode ser usado com [[running|diversas ferramentas]].
+
+Imagens podem ser geradas nos formatos PNG, [[svg|SVG]] ou [[latex|LaTeX]]. Também é possível gerar  [[ascii-art|ASCII art diagrams]] (somente para diagramas de sequência).
+
+----
+
+**# online generations:**
+  * Since ever //4242424242//
+  * Last 24 hours //42424242//
+  * Last hour //4242//
+  * Last minute //42//
+
+^ __Example__: \\  //(You can edit the text if you want, the diagram will be dynamically updated!)// ^ __describes the following diagram :__^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+This example is working thanks to the [[http://www.plantuml.com/plantuml|online demo server]].
+
+----
+
+//Você pode contribuir com esta página clicando aqui.//
+

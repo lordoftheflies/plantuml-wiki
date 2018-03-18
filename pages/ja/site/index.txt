@@ -1,0 +1,54 @@
+<nodisp>TITLE: シンプルなテキストファイルで UML が書ける、オープンソースのツール</nodisp>
+<nodisp>DESC: シンプルなテキストファイルから UML ダイアグラムを作成することができます。作ることのできるダイアグラムには、多くの種類があります。それらは、PNG、LaTeX、EPS、SVG などの画像でエクスポートできます。</nodisp>
+
+====== PlantUML 概要 ======
+
+**PlantUML** は、以下のようなダイアグラムを素早く作成するためのコンポーネントです。
+
+  * [[sequence-diagram|シーケンス図]]
+  * [[use-case-diagram|ユースケース図]]
+  * [[class-diagram|クラス図]]
+  * [[activity-diagram-beta|アクティビティ図]]（[[activity-diagram-legacy|古い文法はこちら]]）
+  * [[component-diagram|コンポーネント図]]
+  * [[state-diagram|状態遷移図（ステートマシン図）]]
+  * [[object-diagram|オブジェクト図]]
+  * [[deployment-diagram|配置図]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|タイミング図]] {{:site:beta-icon.gif?nolink|}}
+
+以下のような、UML以外の図もサポートしてます。
+
+  * [[salt|ワイヤーフレーム]]
+  * [[archimate-diagram|アーキテクチャ図]]
+  * [[activity-diagram-beta#sdl|仕様及び記述言語 (SDL)]]
+  * [[ditaa|Ditaa]]
+  * [[gantt-diagram|ガントチャート]]
+  * [[ascii-math|AsciiMath や JLaTeXMath による、数学的記法]]
+
+各ダイアグラムは、シンプルで直感的に書くことができます。
+[[http://translate.plantuml.com/ja/PlantUML_Language_Reference_Guide_JA.pdf |リファレンスガイド（PDFファイル）]]もあります。
+
+PlantUML を初めて使います！という方は、まず[[starting|クイックスタートガイド]]を御覧ください。
+
+よくある質問は、 [[faq|FAQ をご覧ください]]。
+
+PlantUML は、[[running|いろいろなツールで使用されています]]。
+
+画像ファイルでの出力は、PNG、 [[svg|SVG]]、 [[latex|LaTeX]] に対応しています。
+今はシーケンス図だけですが、[[ascii-art|アスキーアートで出力する]]こともできます。
+
+----
+
+**#オンラインジェネレータ**
+  * Since ever //4242424242//
+  * Last 24 hours //42424242//
+  * Last hour //4242//
+  * Last minute //42//
+
+^ ↓ のコードを変更すると、リアルタイムに右の図に反映されます！！ ^ ^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+このジェネレータは、[[http://www.plantuml.com/plantuml|オンラインサーバ]]で図を生成しています。
+----
+
+//このページにコントリビュートすることができます。//
+

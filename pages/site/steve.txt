@@ -1,0 +1,19 @@
+<nodisp>TITLE: Special command dedicated to Apple IIe</nodisp>
+<nodisp>DESC: There are some Easter eggs in PlantUML. This one is dedicated to the Apple IIe computer, which is a great machine. You can see the picture here.</nodisp>
+
+====== Steve Jobs, 1955 - 2011 ======
+
+A special command dedicated to [[http://en.wikipedia.org/wiki/Steve_Jobs|Steve Jobs]] and
+[[http://en.wikipedia.org/wiki/Steve_Wozniak|Steve Wozniak]].
+<columns 100% 50% ->
+<code>
+@startuml
+apple II
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+apple II
+</uml>
+</columns>
+

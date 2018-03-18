@@ -1,0 +1,52 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: UML 다이어그램을 그릴 간단한 텍스트 설명을 사용하여 오픈 소스 도구입니다.</nodisp>
+<nodisp>DESC: 쉽게 간단한 텍스트 설명에서 UML 다이어그램을 만들 수 있습니다. 가능한 다이어그램의 많은 종류가있다. 그것은 PNG, 유액, EPS, SVG 이미지를 내보낼 수도 있습니다.</nodisp>
+
+====== PlantUML in a nutshell ======
+
+**PlantUML** 은 다이어그램을 빠르게 작성하기 위한 오픈 소스 프로젝트입니다.
+
+  * [[sequence-diagram|시퀀스 다이어그램]]
+  * [[use-case-diagram|유즈케이스 다이어그램]]
+  * [[class-diagram|클래스 다이어그램]]
+  * [[activity-diagram-beta|액티비티 다이어그램]] (here is [[activity-diagram-legacy|the legacy syntax)]]
+  * [[component-diagram|컴포넌트 다이어그램]]
+  * [[state-diagram|상태 다이어그램]]
+  * [[object-diagram|객체 다이어그램]]
+  * [[deployment-diagram|Deployment diagram]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|Timing diagram]] {{:site:beta-icon.gif?nolink|}}
+
+다음의 UML 이외의 다이어그램도 지원함:
+
+  * [[salt|Wireframe graphical interface]]
+  * [[archimate-diagram|Archimate diagram]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|Ditaa diagram]]
+  * [[gantt-diagram|Gantt diagram]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|Mathematic with AsciiMath or JLaTeXMath notation]]
+
+간단하고 직관적인 언어를 사용해 다이어그램을 정의할 수 있습니다. ([[http://translate.plantuml.com/ko/PlantUML_Language_Reference_Guide_KO.pdf|PlantUML 언어 참조 가이드]]).
+
+새 사용자는 [[starting|빠른 시작 페이지]]를 읽을 수 있습니다. 또한 [[faq|FAQ 페이지]]도 있습니다. PlantUML 은 [[running|많은 다른 툴]]과 함께 사용할 수도 있습니다.
+
+
+만들 수 있는 이미지 포멧은 PNG, [[svg|SVG]], [[latex|LaTeX]] 입니다. 또한 [[ascii-art|ASCII art 다이어그램]] 으로도 만들 수 있습니다. (시퀀스 다이어그램만 가능).
+
+----
+
+**# online generations:**
+  * Since ever //4242424242//
+  * Last 24 hours //42424242//
+  * Last hour //4242//
+  * Last minute //42//
+
+^ __Example__: \\  //(You can edit the text if you want, the diagram will be dynamically updated!)// ^ __describes the following diagram :__^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+This example is working thanks to the [[http://www.plantuml.com/plantuml|online demo server]].
+
+----
+
+//여기를 클릭하면이 페이지에 기여할 수 있습니다.//
+

@@ -1,0 +1,40 @@
+<nodisp>TITLE: クイックスタートガイド</nodisp>
+<nodisp>DESC: PlantUML をとりあえず使ってみたい！という人向けのガイドです。</nodisp>
+
+====== PlantUML をとりあえず使ってみたい人へ ======
+最もかんたんで素早く PlantUML を使ってみたい人は、 [[http://www.plantuml.com/plantuml|PlantUML オンラインサーバ]] を使ってみてください。
+
+===== ローカル環境へインストールする =====
+一度は PlantUML をローカルにインストールしたい！と思ったこともあるでしょう。
+
+詳しいことは、[[faq-install|インストールガイド]]をご覧ください。
+
+ここでは、概要を説明します。
+
+自分の環境に **Java** をインストールしておいてください。
+また、シーケンス図とアクティビティ図 **以外** のダイアグラムを使いたい場合は、[[graphviz-dot|Graphviz software]] もインストールしてください。
+
+そしたら、[[http://sourceforge.net/projects/plantuml/files/plantuml.jar/download|plantuml.jar]]をダウンロードしてください。この .jar 実行ファイルが PlantUML 本体です。
+
+インストールできたかをかんたんに確認する方法は、 [[gui|ダウンロードした .jarファイルをダブルクリックし GUI を起動させてみる]]ことです。
+
+以上で、[[running|PlantUML のコードを書いたファイルやドキュメンテーションツールから使用]]できるようになりました。
+
+===== コマンドラインから使う =====
+
+実際にコマンドラインで実行してみる手順も書いておきましょう
+
+まず、以下のような内容の ''sequenceDiagram.txt'' というファイルを作りましょう。
+
+<code>
+@startuml
+Alice -> Bob: test
+@enduml
+</code>
+
+次に、コマンドライン（Windows なら cmd.exe や powershell 、Mac ならターミナル）から以下のコマンドを実行してください。
+<code>
+java -jar plantuml.jar sequenceDiagram.txt
+</code>
+
+そうすると、 ''sequenceDiagram.png'' という画像ができているはずです。

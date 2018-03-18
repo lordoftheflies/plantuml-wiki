@@ -1,0 +1,48 @@
+<nodisp>TITLE: outil open-source qui utilise des descriptions textuelles simples pour dessiner des diagrammes UML.</nodisp>
+<nodisp>DESC: Créez facilement des diagrammes UML de la simple description textuelle. Il y a aussi de nombreux types de diagrammes disponibles. Il est également possible d'exporter des images au format PNG, LaTeX, EPS, SVG.</nodisp>
+
+====== PlantUML en un mot ======
+
+**PlantUML** est un composant qui permet de dessiner rapidement des:
+
+  * [[sequence-diagram|diagrammes de séquence]]
+  * [[use-case-diagram|diagrammes de cas d'utilisation]]
+  * [[class-diagram|diagrammes de classes]]
+  * [[activity-diagram-beta|diagrammes d'activité]] (ici [[activity-diagram-legacy|l'ancienne syntaxe)]]
+  * [[component-diagram|diagrammes de composant]]
+  * [[state-diagram|diagrammes d'état]]
+  * [[object-diagram|diagrammes d'objet]]
+  * [[deployment-diagram|diagrammes de déploiement]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|diagrammes de temps]] {{:site:beta-icon.gif?nolink|}}
+
+Certains autres diagrammes (hors UML) sont aussi possibles:
+
+  * [[salt|maquette d'interface graphique]]
+  * [[archimate-diagram|diagrammes Archimate]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|diagrammes Ditaa]]
+  * [[gantt-diagram|diagrammes de Gantt]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|notation mathématique avec AsciiMath ou JLaTeXMath]]
+
+Les diagrammes sont définis à l'aide d'un langage simple et intuitif. ([[http://translate.plantuml.com/fr/PlantUML_Language_Reference_Guide_FR.pdf|voir le guide de référence du langage PlantUML]]).
+
+Les nouveaux arrivants peuvent lire [[starting|la page de démarrage rapide]]. Il y a aussi [[faq|une Foire Aux Questions]]. PlantUML peut être utilisé avec [[running|de nombreux autres outils]].
+
+Les images peuvent être générées au format PNG, [[svg|SVG]] ou [[latex|LaTeX]]. Il est aussi possible d'avoir de [[ascii-art|l'ASCII art]] (uniquement pour les diagrammes de séquence).
+
+----
+
+**Images générées en ligne:**
+  * Depuis toujours //4242424242//
+  * Dernières 24 heures //42424242//
+  * Dernière heure //4242//
+  * Dernière minute //42//
+
+^ __Exemple__: \\  //(Vous pouvez modifier le texte, le diagramme sera mis à jour automatiquement!)// ^ __décrit le diagramme suivant :__^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+Cet exemple fonctionne grâce [[http://www.plantuml.com/plantuml|au serveur de démonstration en ligne]].
+
+----
+
+//Vous pouvez contribuer à cette page en cliquant ici.//

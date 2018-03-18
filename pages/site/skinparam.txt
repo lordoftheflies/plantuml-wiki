@@ -1,0 +1,538 @@
+**TITLE**: Changing colors and fonts
+
+**DESC**: PlantUML allows you to change fonts size and type. It's also possible to change background colors, line colors, text colors. You can define UML stereotypes for that purpose.
+
+====== Skinparam command ======
+
+You can change colors and font of the drawing using the ''skinparam'' command.
+
+__Example__:
+
+    skinparam backgroundColor transparent
+
+===== Usage =====
+You can use this command :
+  * 	In the diagram definition, like any other commands,
+  * 	In an [[preprocessing|included file]],
+  * 	In a configuration file, provided in the [[command-line|command line]] or the [[ant-task|ANT task]].
+
+===== Nested =====
+
+
+To avoid repetition, it is possible to nest definition. So the following definition :
+
+    skinparam xxxxParam1 value1
+    skinparam xxxxParam2 value2
+    skinparam xxxxParam3 value3
+    skinparam xxxxParam4 value4
+
+is strictly equivalent to:
+
+    skinparam xxxx {
+        Param1 value1
+        Param2 value2
+        Param3 value3
+        Param4 value4
+    }
+
+===== List =====
+
+Since the documentation is not always up to date, you can have the complete list of parameters using this command:
+
+    java -jar plantuml.jar -language
+
+===== Black and White =====
+
+You can force the use of a black&white output using ''skinparam monochrome true'' command.
+
+<columns 100% 50% ->
+<code>
+@startuml
+
+skinparam monochrome true
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+skinparam monochrome true
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+
+</uml>
+</columns>
+
+
+===== Reverse colors =====
+
+You can force the use of a black&white output using ''skinparam monochrome reverse'' command.
+This can be useful for black background environment.
+
+<columns 100% 50% ->
+<code>
+@startuml
+
+skinparam monochrome reverse
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+skinparam monochrome reverse
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+
+</uml>
+</columns>
+
+
+===== Colors =====
+
+You can use either [[color|standard color name]] or RGB code.
+
+<uml title="List all colors">
+colors
+</uml>
+
+''transparent'' can only be used for background of the image.
+
+
+===== Font color, name and size =====
+
+
+You can change the font for the drawing using ''xxxFontColor'',
+''xxxFontSize'' and ''xxxFontName'' parameters.
+
+__Example:__
+
+    skinparam classFontColor red
+    skinparam classFontSize 10
+    skinparam classFontName Aapex
+
+You can also change the default font for all fonts using ''skinparam defaultFontName''.
+
+__Example:__
+    skinparam defaultFontName Aapex
+
+Please note the fontname is highly system dependent, so do not
+over use it, if you look for portability. ''Helvetica'' and ''Courier''
+should be available on all system.
+
+A lot of parameters are available. You can list them using the following command:
+    java -jar plantuml.jar -language
+
+
+<uml>
+skinparameters
+</uml>
+
+===== Text Alignement =====
+
+Text alignement can be set up to ''left'', ''right'' or ''center''.
+You can also use ''direction'' or ''reverseDirection'' values for ''sequenceMessageAlign''
+which align text depending on arrow direction.
+
+^ Param name ^ Default value ^ Comment ^
+| sequenceMessageAlign | left | Used for messages in sequence diagrams |
+| sequenceReferenceAlign| center| Used for ''ref over'' in sequence diagrams |
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam sequenceMessageAlign center
+Alice -> Bob : Hi
+Alice -> Bob : This is very long
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam sequenceMessageAlign center
+Alice -> Bob : Hi
+Alice -> Bob : This is very long
+</uml>
+</columns>
+
+
+===== Examples =====
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+	
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+	
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+
+@enduml
+</code>
+<newcolumn>
+<uml>
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+	
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+	
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+</uml>
+</columns>
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam handwritten true
+
+skinparam usecase {
+	BackgroundColor DarkSeaGreen
+	BorderColor DarkSlateGray
+
+	BackgroundColor<< Main >> YellowGreen
+	BorderColor<< Main >> YellowGreen
+	
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+
+	ActorBackgroundColor<< Human >> Gold
+}
+
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+
+User -> (Start)
+User --> (Use)
+
+MySql --> (Use)
+@enduml
+</code>
+<newcolumn>
+<uml>
+skinparam handwritten true
+
+skinparam usecase {
+	BackgroundColor DarkSeaGreen
+	BorderColor DarkSlateGray
+
+	BackgroundColor<< Main >> YellowGreen
+	BorderColor<< Main >> YellowGreen
+	
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+
+	ActorBackgroundColor<< Human >> Gold
+}
+
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+
+User -> (Start)
+User --> (Use)
+
+MySql --> (Use)
+</uml>
+</columns>
+
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam roundcorner 20
+skinparam class {
+	BackgroundColor PaleGreen
+	ArrowColor SeaGreen
+	BorderColor SpringGreen
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : aggregation
+@enduml
+</code>
+<newcolumn>
+<uml>
+skinparam roundcorner 20
+skinparam class {
+	BackgroundColor PaleGreen
+	ArrowColor SeaGreen
+	BorderColor SpringGreen
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : aggregation
+</uml>
+</columns>
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+
+skinparam interface {
+  backgroundColor RosyBrown
+  borderColor orange
+}
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+() "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> () HTTP : use
+HTTP - [Web Server] << Apache >>
+@enduml
+</code>
+<newcolumn>
+<uml>
+
+skinparam interface {
+  backgroundColor RosyBrown
+  borderColor orange
+}
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+() "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> () HTTP : use
+HTTP - [Web Server] << Apache >>
+</uml>
+</columns>
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+
+node node1
+node node2 <<shared node>>
+database Production
+
+skinparam component {
+    backgroundColor<<static lib>> DarkKhaki
+    backgroundColor<<shared lib>> Green
+}
+
+skinparam node {
+	borderColor Green
+	backgroundColor Yellow
+	backgroundColor<<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+@enduml
+</code>
+<newcolumn>
+<uml>
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+
+node node1
+node node2 <<shared node>>
+database Production
+
+skinparam component {
+    backgroundColor<<static lib>> DarkKhaki
+    backgroundColor<<shared lib>> Green
+}
+
+skinparam node {
+	borderColor Green
+	backgroundColor Yellow
+	backgroundColor<<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+</uml>
+</columns>

@@ -1,0 +1,51 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: инструмент с открытым исходным кодом, который использует простые текстовые описания для рисования UML диаграмм.</nodisp>
+<nodisp>DESC: Легкое создание UML диаграмм из простого текстового описания. Есть также многочисленные виды доступных диаграмм. Кроме того, можно экспортировать изображения в формате PNG, латексные, EPS, SVG.</nodisp>
+
+====== PlantUML in a nutshell ======
+
+**PlantUML** это проект с открытым кодом, позволяющий быстро создавать:
+
+  * [[sequence-diagram|Диаграммы последовательности]]
+  * [[use-case-diagram|Диаграммы прецедентов]]
+  * [[class-diagram|Диаграммы классов]]
+  * [[activity-diagram-beta|Диаграммы активности]] (here is [[activity-diagram-legacy|the legacy syntax)]]
+  * [[component-diagram|Диаграммы компонентов]]
+  * [[state-diagram|Диаграммы состояний]]
+  * [[object-diagram|Диаграммы объектов]]
+  * [[deployment-diagram|Deployment diagram]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|Timing diagram]] {{:site:beta-icon.gif?nolink|}}
+
+Также поддерживаются следующие не-UML диаграммы:
+
+  * [[salt|Wireframe graphical interface]]
+  * [[archimate-diagram|Archimate diagram]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|Ditaa diagram]]
+  * [[gantt-diagram|Gantt diagram]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|Mathematic with AsciiMath or JLaTeXMath notation]]
+
+Для создания диаграмм применяется простой и интуитивно понятный язык. ([[http://translate.plantuml.com/ru/PlantUML_Language_Reference_Guide_RU.pdf|Справочное руководство по языку PlantUML]]).
+
+Новые пользователи могут начать с [[starting|quick start page]]. Так же посетите раздел [[faq|F.A.Q.]]. PlantUML может быть использован с множеством других [[running|инструментов]].
+
+Изображения диаграмм могут быть сгенерированы в различных форматах: PNG, [[svg|SVG]] или [[latex|LaTeX]]. Так же можно сгененировать [[ascii-art|ASCII art diagrams]] (только для диаграмм последовательностей).
+
+----
+
+**# online generations:**
+  * Since ever //4242424242//
+  * Last 24 hours //42424242//
+  * Last hour //4242//
+  * Last minute //42//
+
+^ __Пример__: \\  //(Вы можете редактировать текст. Диаграмма будет автоматически обновлена!)// ^ __describes the following diagram :__^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+This example is working thanks to the [[http://www.plantuml.com/plantuml|online demo server]].
+
+----
+
+//Вы можете внести свой вклад на этой странице, нажав здесь.//
+

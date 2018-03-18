@@ -1,0 +1,51 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Open-Source-Tool, das einfache Textbeschreibungen verwendet UML-Diagramme zu zeichnen.</nodisp>
+<nodisp>DESC: Leicht UML-Diagramme aus einfachen Textbeschreibung erstellen. Es gibt auch zahlreiche Art der zur Verfügung stehenden Diagramme. Es ist auch möglich, Bilder im PNG, LaTeX, EPS, SVG zu exportieren.</nodisp>
+
+====== PlantUML – Ein kurzer Überblick ======
+
+**PlantUML** ist ein quelloffenes Projekt, welches das Erstellen von UML-Digrammen ermöglicht. Es werden die folgenden Typen von UML-Diagrammen unterstützt:
+
+  * [[sequence-diagram|Sequenzdiagramm]]
+  * [[use-case-diagram|Anwendungsfalldiagramm]]
+  * [[class-diagram|Klassendiagramm]]
+  * [[activity-diagram-beta|Aktivitätsdiagramm]] (hier ist [[activity-diagram-legacy|die Syntax früherer Versionen]])
+  * [[component-diagram|Komponentendiagramm]]
+  * [[state-diagram|Zustandsdiagramm]]
+  * [[object-diagram|Objektdiagramm]]
+  * [[deployment-diagram|Verteilungsdiagramm]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|Zeitverlaufsdiagramm]] {{:site:beta-icon.gif?nolink|}}
+
+Außer UML werden die folgenden Diagrammtypen unterstützt.
+
+  * [[salt|Wireframe graphical interface]]
+  * [[archimate-diagram|Archimate diagram]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|Ditaa-Diagramm]]
+  * [[gantt-diagram|Gantt-Diagramm]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|Mathematik in AsciiMath- oder JLaTeXMath-Notation]]
+
+Diagramme werden in einfacher und intuitiver Sprache durch textuelle Notation beschrieben. ([[http://translate.plantuml.com/de/PlantUML_Language_Reference_Guide_DE.pdf|PlantUML Sprachreferenz]]).
+
+Neue Nutzer können die [[starting|Kurzanleitung]] lesen. Auch [[faq|F.A.Q.]] sind vorhanden. PlantUML kann mit [[running|vielen anderen Werkzeugen]] verwendet werden.
+
+Bilder können im PNG-, [[svg|SVG]]- oder [[latex|LaTeX]]-Format erstellt werden. Auch Diagramme in [[ascii-art|ASCII-Art]] sind möglich (nur bei Sequenzdiagrammen).
+
+----
+
+**Anzahl online generierter Diagramme:**
+  * Jemals //4242424242//
+  * Binnen den letzten 24 Stunden //42424242//
+  * Binnen der letzten Stunde //4242//
+  * Binnen der letzten Minute //42//
+
+^ __Beispiel__: \\  //(Wenn Du willst kannst Du den Text bearbeiten, das Diagramm wird dynamisch aktualisiert!)// ^ __beschreibt das folgende Diagramm__:^
+| ''Bob->Alice : hallo''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+Dieses Beispiel funktioniert dank des [[http://www.plantuml.com/plantuml|Online-Demo-Servers]].
+
+----
+
+//Sie können zu dieser Seite beitragen, indem Sie hier klicken.//
+

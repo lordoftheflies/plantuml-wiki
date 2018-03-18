@@ -1,0 +1,57 @@
+<nodisp>TITLE: Generation of LaTeX files</nodisp>
+<nodisp>DESC: PlantUML can generate LaTeX file thanks to Tikz package. Those files can be integrated in LaTeX with a better result than PNG files, because the generated images are scalable.</nodisp>
+
+====== LaTeX ======
+
+Starting from version 7997, PlantUML allows to generate diagrams into [[http://en.wikipedia.org/wiki/LaTeX|LaTeX]], thanks to [[http://en.wikipedia.org/wiki/Tikz|Tikz package]].
+
+Note that this is still beta, and many things won't probably work. Since we do not want to spend time on features not used, we will wait for users [[http://forum.plantuml.net/1798/latex-tikz-support|to report bugs here]].
+
+You just have to use the flag ''-tlatex'' with the [[command-line|command line]], or ''format="latex"'' with the [[ant-task|ANT task]].
+
+====== Class diagram example ======
+
+<columns 100% 50% ->
+<code>
+@startuml
+class Subscriber {
+  subscriberId
+}
+
+class AccumUsage {
+  subscriberId
+}
+
+class IpSession {
+  ipAddress
+  specificData 
+  sapcOriginStateId 
+  apnId
+}
+
+Subscriber "1" -[#blue]-> "1..*" IpSession
+Subscriber "1" --> "0..1" AccumUsage
+@enduml
+</code>
+<newcolumn>
+{{:site:tikz01.png?nolink|}}
+</columns>
+
+[[https://www.writelatex.com/read/pgkkspzgzgpb|See result online]]
+
+====== Sequence diagram example ======
+
+<columns 100% 50% ->
+<code>
+@startuml
+Bob -> Alice: hello
+return Ok
+@enduml
+</code>
+<newcolumn>
+{{:site:tikz02.png?nolink|}}
+</columns>
+
+[[https://www.writelatex.com/read/vmrvxnvzytbr|See result online]]
+
+

@@ -1,0 +1,30 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Guide de démarrage rapide</nodisp>
+<nodisp>DESC: You will learn how to quickly start using PlantUML.</nodisp>
+
+====== PlantUML pour l'impatient ======
+
+La façon la plus simple et la plus rapide de tester PlantUML est d'utiliser une des solutions en-ligne. Par exemple, vous pouvez utiliser [[http://www.plantuml.com/plantuml|le serveur PlantUML]].
+
+===== Installation locale =====
+
+Une fois que vous avez compris l'idée, vous pouvez éventuellement installer localement PlantUML. ([[faq-install|Il y a une Foire Aux Questions sur l'installation ici]])
+
+Vous devez avoir //Java// installé sur votre machine et de façon optionnelle [[graphviz-dot|le logiciel Graphviz]] qui est utilisé pour la plupart des diagrammes (sauf diagrammes de séquences et digrammes d'activités).
+
+Il suffit de télécharger le fichier jar [[http://sourceforge.net/projects/plantuml/files/plantuml.jar/download|plantuml.jar]] et de le sauvegarder sur votre disque local.
+
+La façon la plus simple d'utiliser votre installation local est de [[gui|double-cliquer sur les fichier JAR]].
+
+Vous pouvez aussi [[running|intégrer PlantUML dans vos propres scripts ou vos outils de documentation]]:
+
+  - Créer un fichier contenant un diagramme PlantUML, soit avec un éditeur de texte, soit avec un autre logiciel intégrant PlantUML.\\ Par exemple, voici un fichier nommé ''sequenceDiagram.txt'':<code>
+@startuml
+Alice -> Bob: test
+@enduml
+</code>
+  - Lancer PlantUML (ou laisser votre logiciel appeler PlantUML) avec ce fichier en entrée. Le résultat est une image, qui apparaîtra soit dans votre logiciel ou qui sera sauvegardée sur votre disque:\\ Par exemple,<code>
+java -jar plantuml.jar sequenceDiagram.txt
+</code>
+ce qui générera l'image correspondante dans le fichier ''sequenceDiagram.png''...

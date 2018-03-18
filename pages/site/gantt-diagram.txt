@@ -1,0 +1,182 @@
+<nodisp>TITLE: Gantt Diagram syntax and features</nodisp>
+<nodisp>DESC: PlantUML Gantt diagram syntax: Gantt diagrams are not fully supported within PlantUML. This is a draft version of the language can be subject to changes.</nodisp>
+
+====== Gantt Diagram ======
+
+__This is only a proposal and subject to change__.
+
+You are very welcome [[http://forum.plantuml.net|to create a new discussion]] on this future syntax. Your feedbacks, ideas and suggestions help us to find the right solution.
+
+The Gantt is described in //natural// language, using very simple sentences (subject-verb-complement). 
+
+===== Declaring tasks =====
+
+Tasks defined using square bracket. Their durations are defined using the ''last'' verb:
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+</uml>
+</columns>
+
+===== Adding constraints =====
+It is possible to add constraints between task. 
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+[Test prototype] starts at [Prototype design]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Prototype design] lasts 15 days
+[Test prototype] lasts 10 days
+[Test prototype] starts at [Prototype design]'s end
+</uml>
+</columns>
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Prototype design] lasts 10 days
+[Code prototype] lasts 10 days
+[Write tests] lasts 5 days
+[Code prototype] starts at [Prototype design]'s end
+[Write tests] starts at [Code prototype]'s start
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Prototype design] lasts 10 days
+[Code prototype] lasts 10 days
+[Write tests] lasts 5 days
+[Code prototype] starts at [Prototype design]'s end
+[Write tests] starts at [Code prototype]'s start
+</uml>
+</columns>
+
+
+===== Short names =====
+It is possible to define short name for tasks with the ''as'' keyword. 
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Prototype design] as [D] lasts 15 days
+[Test prototype] as [T] lasts 10 days
+[T] starts at [D]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Prototype design] as [D] lasts 15 days
+[Test prototype] as [T] lasts 10 days
+[T] starts at [D]'s end
+</uml>
+</columns>
+
+
+===== Customize colors =====
+It also possible to customize [[https://www.w3schools.com/colors/colors_names.asp|colors]]. 
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Prototype design] lasts 13 days
+[Test prototype] lasts 4 days
+[Test prototype] starts at [Prototype design]'s end
+[Prototype design] is colored in Fuchsia/FireBrick 
+[Test prototype] is colored in GreenYellow/Green 
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Prototype design] lasts 13 days
+[Test prototype] lasts 4 days
+[Test prototype] starts at [Prototype design]'s end
+[Prototype design] is colored in Fuchsia/FireBrick 
+[Test prototype] is colored in GreenYellow/Green 
+</uml>
+</columns>
+
+
+===== Milestone =====
+You can define Milestones using the ''happens'' verb. 
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Test prototype] lasts 10 days
+[Prototype completed] happens at [Test prototype]'s end
+[Setup assembly line] lasts 12 days
+[Setup assembly line] starts at [Test prototype]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Test prototype] lasts 10 days
+[Prototype completed] happens at [Test prototype]'s end
+[Setup assembly line] lasts 12 days
+[Setup assembly line] starts at [Test prototype]'s end
+</uml>
+</columns>
+
+
+===== Calendar =====
+You can specify a starting date for the whole project. By default, the first task starts at this date. 
+
+<columns 100% 50% ->
+<code>
+@startgantt
+Project starts the 20th of september 2017
+[Prototype design] as [TASK1] lasts 13 days
+[TASK1] is colored in Lavender/LightBlue
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+Project starts the 20th of september 2017
+[Prototype design] as [TASK1] lasts 13 days
+[TASK1] is colored in Lavender/LightBlue
+</uml>
+</columns>
+
+
+===== Complex example =====
+It also possible to use the ''and'' conjunction.
+
+You can also add delays in constraints. 
+
+<code>
+@startgantt
+[Prototype design] lasts 13 days and is colored in Lavender/LightBlue
+[Test prototype] lasts 9 days and is colored in Coral/Green and starts 3 days after [Prototype design]'s end
+[Write tests] lasts 5 days and ends at [Prototype design]'s end
+[Hire tests writers] lasts 6 days and ends at [Write tests]'s start
+[Init and write tests report] is colored in Coral/Green
+[Init and write tests report] starts 1 day before [Test prototype]'s start and ends at [Test prototype]'s end
+@endgantt
+</code>
+
+<uml title="simple UML timing diagram">
+[Prototype design] lasts 13 days and is colored in Lavender/LightBlue
+[Test prototype] lasts 9 days and is colored in Coral/Green and starts 3 days after [Prototype design]'s end
+[Write tests] lasts 5 days and ends at [Prototype design]'s end
+[Hire tests writers] lasts 6 days and ends at [Write tests]'s start
+[Init and write tests report] is colored in Coral/Green
+[Init and write tests report] starts 1 day before [Test prototype]'s start and ends at [Test prototype]'s end
+</uml>
+
+
+

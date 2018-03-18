@@ -1,0 +1,21 @@
+<nodisp>TITLE: Generation of EPS Encapsulated PostScript file</nodisp>
+<nodisp>DESC: PlantUML can generate images using EPS format. Those file can be integrated in LaTeX or PDF documents with a better result than PNG files, because EPS is a scalable format.</nodisp>
+
+
+===== EPS =====
+[[http://en.wikipedia.org/wiki/Encapsulated_PostScript|EPS]] is
+a graphical format which is scalable. It means that when you zoom an
+image, you don't loose quality. So this format gives good printing
+result.
+
+
+===== EPS Support =====
+You can enable it by using ''-teps'' flag with the [[command-line|command line]].
+
+You can also use ''format="eps"'' in the [[ant-task|ant task definition]].
+<code>
+<target name="main">
+<plantuml dir="./src" format="eps" />
+</target>
+</code>
+

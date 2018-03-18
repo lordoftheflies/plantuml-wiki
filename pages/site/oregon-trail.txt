@@ -1,0 +1,109 @@
+<nodisp>TITLE: Play the Oregon Trail</nodisp>
+<nodisp>DESC: The Oregon Trail is a computer game developed in 1971. The original game was designed to teach school children about the realities of 19th century pioneer life on the Oregon Trail.</nodisp>
+
+
+====== The Oregon Trail ======
+
+The [[http://en.wikipedia.org/wiki/The_Oregon_Trail_(video_game)|Oregon Trail]] is a //very old// game created
+in 1971.
+
+A version from [[http://www.atariarchives.org/bca|David Ahl's]] (named as
+[[http://www.atariarchives.org/bca/Chapter02_WestwardHo.php|Westward Ho!]] for some reasons)
+has been ported to Java and integrated in **PlantUML**...
+
+This page is dedicated to:
+  * Dan Rawitsch
+  * Bill Heinemann
+  * Paul Dillenberger
+  * David Ahl
+
+===== Let's play =====
+
+To launch the game, you will have to use the good old ''RUN'' Basic command :
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+</uml>
+</columns>
+
+Every input has to be added in the text file:
+
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+150
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+150
+</uml>
+</columns>
+
+Every input has to be added in the text file:
+
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+150
+100
+10
+40
+40
+4
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+150
+100
+10
+40
+40
+4
+</uml>
+</columns>
+
+For shooting, you will have to type **as fast as possible**
+the word printed on the screen (//like in the original version!//).
+
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+150
+100
+10
+40
+40
+3
+1
+blam
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+150
+100
+10
+40
+40
+3
+1
+blam
+</uml>
+</columns>
+Good luck to you on the //Oregon Trail// !
+
+

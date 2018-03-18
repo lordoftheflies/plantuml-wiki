@@ -1,0 +1,60 @@
+**TITLE**: Frequently Asked Questions about installation
+
+**DESC**: This pages lists some very common questions about the installation of PlantUML. Please read it first before sending us mail or asking your question on the forum.
+
+====== Installation notes ======
+
+===== Sequence Diagram =====
+
+First, you should focus only on **Sequence Diagrams**. Even if you are not interested in sequence diagrams, since they are working without Graphviz, it is somehow simplier to let them work. And if they do not work, __other diagrams will probably also not work__.
+
+You should then test **Sequence Diagrams** using the command line, and not in the target tool you want to install (Eclipse, Word, Mediawiki...) :
+
+    java -jar plantuml.jar -verbose sequenceDiagram.txt
+
+In the ''sequenceDiagram.txt'' file, you can have a very simple test:
+
+    @startuml
+    Alice -> Bob: test
+    @enduml
+
+The ''-verbose'' flag is used to generated some logs that you can send to us, if no image is generated.
+
+Under Unix, you must have X11 librairies installed (which is done by default). Otherwise, you will have some [[http://www.oracle.com/technetwork/articles/javase/headless-136834.html|HeadlessException]].
+You may have to add a flag ''-Djava.awt.headless=true'' in the [[command-line|command line]]. 
+
+If this is working, but not in your tool, it is probably due to a specific tool issue:
+
+On MediaWiki & Windows, you must set the read & execute permissions on ''C:\Windows\system32\cmd.exe'' for the account the PHP web service extension is running under. PHP needs those permissions to "fork" other processes.
+
+
+===== Others Diagrams =====
+
+Once sequence diagrams are working fine, you can focus on others diagrams.
+
+If Graphviz is not installed on your system, you have to [[graphviz-dot|install it first]].
+
+Under Linux, try to launch ''dot'' command into a command shell. You //may// have to finalize the installation by typing ''dot -C''.
+
+[[graphviz-dot|You may have to set GRAPHVIZ_DOT]] variables if you have not chosen the default installation directory of Graphviz.
+
+To test the installation of Graphviz, you can use the command line:
+    java -jar plantuml.jar -testdot
+
+You can also use this special diagram description:
+
+    @startuml
+    testdot
+    @enduml
+
+Once again, you should test using the command line and the ''-verbose'' flag:
+
+    java -jar plantuml.jar -verbose classDiagram.txt
+
+The ''classDiagram.txt'' file can be very simple:
+
+    @startuml
+    A <|-- B
+    @enduml
+
+If you still have issues, then you can [[mailto:plantuml@gmail.com|send us a mail]].

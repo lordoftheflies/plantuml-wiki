@@ -1,0 +1,86 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Intégration avec Ant</nodisp>
+<nodisp>DESC: Using Ant and PlantUML together is a good way to automatically generate your diagrams from scripts. You can then build your documentation and your software at the same time.</nodisp>
+
+====== Création d'une tâche ANT ======
+Vous devez tout d'abord construire votre fichier ''build.xml'' de façon similaire à l'exemple suivant:
+
+<code>
+<project name="OwnTaskExample" default="main" basedir=".">
+<!-- définition de la tâche-->
+<taskdef name="plantuml" classname="net.sourceforge.plantuml.ant.PlantUmlTask" classpath="plantuml.jar" />
+
+<!-- traitement des fichiers du répertoire ./src -->
+<target name="main">
+<plantuml dir="./src" />
+</target>
+</project>
+</code>
+
+La tâche ANT parcourt tous les fichiers **.c**, **.h**, **.cpp**, **.tex**, **.html**, **.htm** et **.java** du répertoire fourni (''./src'' dans l'exemple précédent). Elle recherche des ''@startXXX'' et génèrent les images ''.png'' correspondantes.
+
+===== Répertoire de sortie =====
+
+Vous pouvez aussi spécifier un répertoire de sortie pour les images générées à l'aide de l'option ''output''.
+<code>
+<!-- Générer les images dans c:/images -->
+<target name="main">
+<plantuml dir="./src" output="c:/images" />
+</target>
+</code>
+
+===== Traiter récursivement les répertoires =====
+
+Il est possible d'utiliser les notations ANT standard [[http://www.163jsp.com/help/antman1.7.1/CoreTypes/fileset.html|fileset]]
+ou [[http://www.163jsp.com/help/antman1.7.1/CoreTypes/filelist.html|filelist]].
+
+Par exemple, si vous voulez traiter tous les fichiers ''.java'' du répertoire ''c:/src'' ainsi que de ses sous-répertoires (sauf pour les fichiers finissant par ''Test.java''), et générer les images dans ''d:/images'', vous pouvez utiliser la description suivante:
+<code>
+<target name="main">
+<plantuml output="d:/images" >
+<fileset dir="c:/src">
+<include name="**/*.java" />
+<exclude name="**/*Test.java" />
+</fileset>
+</plantuml>
+</target>
+</code>
+
+===== Format SVG et EPS =====
+
+Vous pouvez préciser ''format="svg"'' ou ''format="eps"'' dans la définition de la tâche ANT.
+<code>
+<target name="main">
+<plantuml dir="./src" format="svg" />
+</target>
+</code>
+
+===== Fichier de configuration =====
+
+Il est possible de définir un fichier de configuration qui sera inclus avant chaque diagramme.
+
+<code>
+<target name="main">
+<plantuml dir="./src" config="./config.cfg" />
+</target>
+</code>
+
+===== Autres paramètres =====
+
+^ Paramètres ^ Valeur par défaut ^ Description ^
+| nbthread | 1 | Nombre de thread pour le traitement |
+| graphvizDot | | Chemin de l'exécutable dot |
+| format | png | Format de l'image générée: xmi, xmi:argo, xmi:start, eps, svg, txt, utxt |
+| verbose | ''false'' | ''true'' pour des détails de log |
+| config | | Fichier de configuration inclus avant chaque diagramme |
+| charset | | Codage de caractères à utiliser lors de la lecture des fichiers sources |
+| output | | Répertoire de sortie pour les images |
+| dir | | Répertoire à traiter (Vous pouvez utiliser ''<fileset>/<filelist>'' à la place) |
+| failonerror | ''false'' | ''true'' pour arrêter le traitement si des diagrammes sont en erreur |
+| checkonly | ''false'' | ''true'' si vous voulez uniquement contrôler la syntaxe sans générer d'images |
+| overwrite | ''false'' | ''true'' pour forcer l'écriture des fichiers en lecture seule |
+| enablestats | ''false'' | ''true'' pour activer les statistiques |
+| htmlstats | ''false'' | ''true'' pour générer les statistiques dans le fichier plantuml-stats.html |
+| xmlstats | ''false'' | ''true'' pour générer les statistiques dans le fichier plantuml-stats.xml |
+| realtimestats | ''false'' | ''true'' pour générer les statistiques en temps réel plutôt qu'à la fin du traitement |

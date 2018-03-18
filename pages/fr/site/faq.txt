@@ -1,0 +1,303 @@
+<nodisp>TITLE: Foire Aux Questions</nodisp>
+<nodisp>DESC: Ces pages énumère quelques questions très courantes sur PlantUML. S'il vous plaît lire avant de nous envoyer du courrier ou de poser votre question sur le forum.</nodisp>
+
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+====== F.A.Q. ======
+
+===== Quel est l'objectif de PlantUML ? =====
+
+**PlantUML** est utilisé pour //dessiner// des diagrammes UML, à l'aide d'un langage simple à lire pour un utilisateur.
+
+Attention, parce qu'il est tout à fait possible de dessiner des diagrammes incohérents (comme deux classes qui héritent l'une de l'autre par exemple).
+Donc il s'agit plus d'un outil de **dessin** qu'un outil de **modélisation**.
+
+===== Combien de temps sont stockées les images générées par le service en ligne PlantUML ? =====
+
+Les liens (png ou svg) générés par le [[http://www.plantuml.com/plantuml|serveur PlantUML]] sont valides indéfiniment (c'est à dire tant que le service est disponible).
+Toutefois, nous **ne stockons aucune image** sur nos serveurs.
+
+Cela peut paraître contradictoire. Ca ne l'est pas: la totalité du diagramme est [[text-encoding|compressé dans l'URL elle-même]]. Quand le serveur reçoit une URL, il la décompresse pour retrouver le texte du diagramme correspondant et générer l'image. Il n'y a pas besoin de stocker quoi que ce soit. D'ailleurs, même si le serveur est hors-service, vous pouvez récupérer le diagramme en utilisant l'option ''-decodeurl'' de la [[command-line|ligne de commande]]. Enfin, le texte du diagramme est aussi stocké dans les métadonnées du fichier PNG, donc vous pouvez le récupérer depuis une image.
+
+Parfois, nous sommes amenés à activer des traces HTTP sur notre server. Nous faisons ceci pour analyser les requêtes que nous recevons lorsque nous avons des problèmes de performance (ce qui n'arrive pas très souvent). Une fois le problème résolu, nous désactivons les traces HTTP et nous supprimons les fichiers de log.
+
+Notez que nous comptons aussi le nombre de diagrammes générés (nombre affiché sur la page d'accueil) pour mesurer la charge de notre serveur.
+
+A propos de la confidentialité des données, même si nous ne stockons pas les diagrammes générés, il faut savoir que comme le protocole HTTP n'est pas sécurisé, il est assez facile d'intercepter les diagrammes.
+
+Donc vous devriez installer [[server|un serveur local]] sur votre propre réseau si vous souhaitez créer des diagrammes avec des informations confidentielles.
+
+===== Cela ne fonctionne pas avec ma configuration! =====
+
+**PlantUML** a été installé sur de nombreux systèmes. Toutefois, certains utilisateurs ont parfois rencontré des difficultés en l'installant. 
+Vous pouvez [[faq-install|consulter cette page]] qui donne des conseils spécifiques à l'installation si vous avez des problèmes.
+
+===== Quelle version de Graphviz dois-je utiliser ? =====
+
+Vous trouvevez plus d'information sur Graphviz [[graphviz-dot|ici]] et un test rapide à faire ici [[graphviz-dot#test|here]].
+
+PlantUML devrait fonctionner avec les versions de Graphviz à partir de la version **2.26.3**
+
+Les versions suivantes ont été testées et sont fonctionnelles:
+
+  * 2.26.3
+  * 2.28
+  * 2.30.1
+  * 2.34
+  * 2.36
+  * 2.38
+
+Noter que la version 2.39 [[http://plantuml.sourceforge.net/qa/?qa=4531/possible-bug-with-relation-in-rectangle-screenshot|ne fonctionne pas correctement avec PlantUML]].
+
+Si vous compilez Graphviz vous-même, prenez garde à bien inclure //libexpat// lors de la compilation pour que cela fonctionne avec PlantUML.
+
+===== Ce logiciel est-il mature ? Je ne vois aucune nouvelle version ? =====
+
+Les [[https://www.google.com/trends/explore#q=plantuml|tendances Google]] sont très positives. Et il y a même [[https://www.google.com/search?tbm=bks&q=plantuml|quelques livres qui mentionnent PlantUML]]. Donc oui, le logiciel est mature.
+
+Il faut dire que **PlantUML** est développé en [[http://en.wikipedia.org/wiki/Continuous_integration|integration continue]]. Cela signifie qu'il y a régulièrement de nouvelles versions, avec (on l'espère!) une compatibilité ascendante. Donc le fichier **PlantUML.jar** évolue avec le temps tout en conservant le même nom.
+
+Si vous voulez avoir des détails sur la version que vous utilisez, vous pouvez lancer la ligne de commande suivante:
+
+	java -jar plantuml.jar -version
+	
+
+ou utiliser le diagramme spécial suivant :
+
+	@startuml
+	version
+	@enduml
+
+ ===== Comment savoir si une nouvelle version est disponible ? =====
+
+Pour vérifier si une nouvelle version est disponible, vous pouvez aller sur [[download|la page de téléchargement]].
+
+Vous pouvez aussi consulter les flux rss suivants:
+
+  * [[http://forum.plantuml.net/feed/activity.rss|Activités récentes sur le forum]]
+  * [[http://forum.plantuml.net/feed/qa.rss|Questions et réponses récentes sur le forum]]
+
+Ou alors vous pouvez lancer la commande suivante:
+
+	java -jar plantuml.jar -checkversion	
+
+Cette commande se connecte sur le site web PlantUML donc vous avez peut-être à configurer votre proxy:\\
+(notez que l'option -D doit être positionnée après l'option -jar)
+
+	java -Dhttp.proxyHost=myproxy.com -Dhttp.proxyPort=8080 -jar plantuml.jar -checkversion	
+
+Ou alors utiliser le diagramme spécial suivant:
+
+	@startuml
+	checkversion
+	@enduml	
+
+Vous pouvez aussi configurer votre proxy à l'aide de la syntaxe suivante:
+
+	@startuml
+	checkversion(proxy=myproxy.com,port=8080)
+	@enduml
+	
+
+===== J'ai une erreur avec le plugin Eclipse. =====
+
+Si vous avez le message suivant:
+
+	The currently displayed page contains invalid values
+
+quand vous affichez dans fenêtre de préférence Eclipse (partie PlantUML), vous devez essayer de quitter [[eclipse|Eclipse]] et d'utiliser l'option ''-clean'' sur la ligne de commande:
+
+    eclipse -clean
+
+===== Je veux générer de très grands diagrammes! =====
+
+PlantUML limite la taille des images à 4096 pixels en largeur et en hauteur. Vous pouvez modifier cette limite grâce à une variable d'environnement: ''PLANTUML_LIMIT_SIZE''. Vous devez régler cette variable avant de lancer PlantUML, de la façon suivante:
+
+	set PLANTUML_LIMIT_SIZE=8192
+
+ou bien
+
+	setenv PLANTUML_LIMIT_SIZE 8192
+
+Une autre façon est de mettre une option sur la ligne de commande:
+
+	java -DPLANTUML_LIMIT_SIZE=8192 -jar /path/to/plantuml.jar ...
+
+
+Notez que si vous générez de **très** grands diagrammes, (par exemple, comme 20 000 x 10 000 pixels), vous risquez d'avoir des problèmes d'allocation mémoire. La solution est de rajouter le paramètre suivant à la JVM: [[http://javahowto.blogspot.com/2006/06/6-common-errors-in-setting-java-heap.html|-Xmx1024m]].
+
+===== J'ai un problème avec les caractères accentués. =====
+
+L'encodage des caractères est quelquechose de subtil... Par défaut, PlantUML utilise le codage par défaut de votre plateforme, qui peut être ou ne pas être de l'UTF-8. Si vous voulez savoir quel encodage vous utilisez, vous pouvez utiliser la commande suivante:
+
+	java -jar plantuml.jar -help
+	
+	...
+	-charset xxx To use a specific charset (default is windows-1252)
+	...
+
+Si vous voulez utiliser un autre encodage, par exemple de l'UTF-8, vous pouvez utiliser l'option ''-charset'':
+
+	java -jar plantuml.jar -charset UTF-8 ...
+	
+
+Vous trouverez [[unicode|ici des informations sur l'unicode]] . Notez que même si Java [[http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4508058|ne supporte pas le caractère B.O.M. (Byte Order Mark) dans un fichier UTF-8]], un contournement a été implémenté dans PlantUML, donc ces caractères ne devraient pas poser de problèmes.
+
+===== J'ai un problème avec les caractères asiatiques. =====
+
+Des utilisateurs japonais ont précisé qu'ils avaient besoin de régler la  variable ''LANG'' à la valeur ''ja_JP.UTF-8'' dans leur console avant de lancer PlantUML.
+
+	export LANG = ja_JP.UTF-8
+
+Depuis [[svek|la nouvelle architecture]], tout devrait fonctionner directement et nativement parce que Java gère directement les caractères asiatiques.
+
+===== Comment générer de l'EPS ? =====
+
+Vous pouvez utiliser l'option ''-eps'' sur la ligne de commande ou bien ''%%format="eps"%%'' avec [[ant|la tâche ANT]].
+
+===== Et le support de XMI ? =====
+
+Le travail [[xmi|est en cours]]!
+
+===== Est-ce que @startuml est nécéssaire avec l'option -pipe ? =====
+
+__Réponse courte__: Oui, il **faut** mettre @startuml (ou alors @startditaa/@startjcckit...) au début d'un diagramme.
+
+__Réponse longue__:
+
+La ligne @startuml/@startditaa/@startjcckit est utilisée pour connaître le type de diagramme (UML, ditaa, jcckit...) et aussi parce qu'il est possible de mettre en option un nom de fichier après @startXXX. De plus, cette ligne permet aussi d'avoir plusieurs diagrammes dans un même fichier.
+
+Les toutes premières version de PlantUML ne géraient qu'un seul type de diagramme (UML). De plus, quand vous utilisez l'option [[command-line#pipe|-pipe]], puisque le diagramme est écrit vers la sortie standard, il ne pouvait y avoir qu'un seul diagramme. Et pour finir, donner un nom de fichier n'avait aucun sens. Pour toutes ces raisons, @startuml n'était pas nécessaire pour l'option [[command-line#pipe|-pipe]] à l'époque.
+
+Plus tard, il a été décidé de normaliser tout ceci et d'imposer @startXXX partout, même dans le cas de l'option [[command-line#pipe|-pipe]], pour éviter les confusions. Malheureusement, certains scripts déjà écrits utilisaient le fait que @startuml n'était pas nécessaire avec l'option [[command-line#pipe|-pipe]], donc
+nous avons gardé ce comportement de façon //temporaire//, pour permettre à ces anciens scripts d'être encore opérationnels. En effet, nous sommes très attentif à la compatibilité ascendante.
+
+Pour les nouveaux scripts, vous ne devez pas vous appuyer sur ce comportement et vous devez utiliser @startuml/@enduml avec l'option [[command-line#pipe|-pipe]].
+
+===== Sous quelle licence est distribué PlantUML ? =====
+
+PlantUML est distribué sous la [[http://www.gnu.org/copyleft/gpl.html|licence GPL]].\\
+Vous pouvez visualiser la licence en utilisant la ligne de commande suivante:
+
+	java -jar plantuml.jar -license
+
+Ou vous pouvez utiliser le diagramme spécial:
+
+	@startuml
+	license
+	@enduml
+
+
+===== Je n'aime pas la licence GPL! =====
+
+Vous pouvez aussi utiliser:
+
+  * [[download#lgpl|la licence LGPL]]
+  * [[download#asl|la license Apache]]
+  * [[download#epl|la licence publique Eclipse]]
+  * [[download#mit|la licence MIT]]
+
+Certaines fonctionnalités ne sont pas incluses dans ces versions ([[ditaa|DITAA]] par exemple).
+
+Vous pouvez visualiser les licences de ces versions à l'aide de la ligne de commande suivante:
+
+	java -jar plantuml.jar -license
+
+Ou vous pouvez utiliser le diagramme spécial suivant:
+
+	@startuml
+	license
+	@enduml
+
+
+===== Les images générées par PlantUML sont-elles couvertes par la licence GPL/LGPL/ASL/EPL/MIT ? =====
+
+Non, elles ne sont pas couvertes par ces licences.
+
+Les images (quelquesoit leur format : PNG, SVG...) générées par l'**exécution** de PlantUML sont la propriété de l'auteur du texte source du diagramme correspondant (exprimé en langage PlantUML).
+
+Les images générées par l'**exécution** de PlantUML **ne sont pas** considérée comme des //créations régies par la licence// (en anglais //covered work//). Vous pouvez faire ce que vous voulez avec ces images.
+
+Les images générées peuvent être utilisées sans aucune référence à la licence GPL/LGPL/ASL/EPL/MIT. Il n'est même pas nécessaire de notifier que vous avez créé ces images avec PlantUML, bien que si vous le faites, cela sera grandement apprécié par l'équipe PlantUML.
+
+Il y a une exception : si la description textuelle en langage PlantUML est elle-même soumise à une licence quelconque (comme la GPL/LGPL/ASL/EPL/MIT), alors les images générées sont logiquement elles aussi soumises à cette même licence.
+
+===== Puis-je redistribué la version LGPL du fichier binaire PlantUML.jar et y a-t-il des contraintes à ce sujet ? =====
+
+Tant que vous ne modifiez pas les sources Java et le fichier jar, vous pouvez intégrer plantuml.jar dans votre propre logiciel, même s'il n'est pas Open Source.
+
+La seule contrainte est que vous avez à stipuler quelquepart dans votre propre licence ou dans votre documentation que vous utilisez PlantUML est que PlantUML est distribué sous licence LGPL.
+
+Vous pouvez même vendre votre logiciel et gagner de l'argent, sans aucune autre contrainte (dans ce cas, un [[donors|don serait apprécié]] '':-)''
+
+===== Quelle est la licence de la syntaxe PlantUML ? =====
+
+Il n'y a pas de licence pour la syntaxe PlantUML en elle-même: cela signifie que tout le monde peut l'utiliser.
+
+Si vous utilisez un diagramme PlantUML dans un commentaire de votre propre code, **ces commentaires vous appartiennent** et ne sont pas considérés comme une  //création régie par la licence// (en anglais //covered work//). Ces commentaires ne sont pas couverts par la licence GPL/LGPL/APL/EPL/MIT.
+
+C'est seulement l'implémentation de PlantUML (c'est à dire le programme Java PlantUML) qui est couvert par la licence GPL, LGPL, ASL, EPL ou MIT. Notez par contre que la documentation publiée sur le site web PlantUML est sous copyright. Mais vous pouvez écrire votre propre documentation.
+
+
+===== J'ai un message "file not found" lors de l'exécution de la Macro Word avec Java 7! =====
+
+Vous devez peut-être régler certaines variables d'environnement. Il s'agit des variables suivantes dans ''Variables d'Environnement'' de Windows:
+
+Variable: ''PATH'', rajouter la valeur suivante: '';C:\Program Files\Java\jre7\bin''\\
+Variable: ''CLASSPATH'', rajouter la valeur suivante: '';C:\Program Files\Java\jre7\lib''
+
+Si elles n'existent pas, créez les variables utilisateur suivantes:
+
+Variable: ''PATH'', rajouter la valeur suivante: ''.;C:\Program Files\Java\jre7\bin.;''\\
+Variable: ''CLASSPATH'', rajouter la valeur suivante: ''.;C:\Program Files\Java\jre7\lib.;''
+
+===== Que signifie l'exception net.sourceforge.plantuml.svek.EmptySvgException ? =====
+
+PlantUML utilise [[graphviz-dot|Graphviz]] pour générer certains diagrammes. De ce fait PlantUML lance l'exécution du programme //dot// et récupère les informations générées par //dot// dans un flux SVG.
+
+Cette exception signifie que PlantUML récupère un flux vide de la part de //dot// et ne peut donc pas générer de diagrammes UML. Ceci peut être dû à plusieurs causes:
+
+  * Il y a un problème avec votre installation de Graphviz. Essayez avec un diagramme très simple contenant une seule classe par exemple.
+  * Votre version de Graphviz est trop ancienne et n'est pas compatible avec PlantUML. Testez votre version avec ''testdot''
+  * Votre diagrammes est trop complexe.
+  * Il y a un bug dans PlantUML et/ou //dot//.
+
+
+===== J'ai un message à propos de X11 ou headless! =====
+
+Si vous exécutez PlantUML sur un serveur linux sans capacité d'affichage, il est possible que vous ayez les messages d'erreur suivants:
+
+  * Can't connect to X11 window
+  * X11 connection rejected because of wrong authentication.
+  * HeadlessException
+
+Ceci est dû au fait que PlantUML a besoin d'accéder à certaines ressources graphiques ([[http://www.oracle.com/technetwork/articles/javase/headless-136834.html|plus d'information ici]]).
+Vous pouvez essayer le mode //headless// à l'aide de l'option ''-Djava.awt.headless=true''.
+Par exemple:
+	/usr/bin/java -Djava.awt.headless=true -jar /data/PlantUml/plantuml.jar ...
+
+===== J'ai une erreur UnsatisfiedLinkError sous Mac OS X ! =====
+
+Sous Mac OS X, si vous rencontrez un message d'erreur suivant:
+	Error java.lang.UnsatisfiedLinkError / liblwawt.dylib /libosxapp.dylib
+
+Vous pouvez suivre les instructions expliquées ici [[http://stackoverflow.com/questions/25914757/osx-yosemite-jvm-shared-library-does-not-contain-the-jni-createjavavm-symbol|http://stackoverflow.com/questions/25914757/osx-yosemite-jvm-shared-library-does-not-contain-the-jni-createjavavm-symbol]]:
+
+  - Téléchargez et installer le package: JavaForOSX.
+  - Cherchez le fichier ''AptanaStidio3.ini'', qui est par défaut situé sous le répertoire suivant: ''/Applications/Aptana Studio 3/AptanaStudio3.app/Contents/MacOS''
+  - Rajoutez l'option ''-vm'' pour indiquer quelle machine Java utiliser pour le lancement de Aptana Studio: ''-vm /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java''
+
+Cela ne semble fonctionner que sous Java 6, donc vous pourriez aussi avoir à définir l'alias suivant pour vos scripts:
+	alias java6="export JAVA_HOME=$(/usr/libexec/java_home -v 1.6.0)"
+
+===== Les scripts PlantUML prennent le focus du clavier! =====
+
+En fonction de votre configuration, vous pouvez essayer l'option ''-Djava.awt.headless=true''.\\
+Par exemple:
+	/usr/bin/java -Djava.awt.headless=true -jar /path/to/plantuml.jar ...
+
+===== J'ai une question qui n'est pas listée! =====
+
+Vous pouvez utiliser le [[http://forum.plantuml.net|forum]].
+
+Quelqu'un aura peut-être une réponse.

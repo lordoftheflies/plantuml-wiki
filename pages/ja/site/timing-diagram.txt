@@ -1,0 +1,359 @@
+<nodisp>TITLE: タイミング図の構文</nodisp>
+<nodisp>DESC: PlantUML タイミング図の文法：タイミング図はまだ完全にサポートされていません。提案段階（draft version）です。構文が変更される可能性があります。</nodisp>
+
+====== タイミング図 ======
+
+__**現在、このダイアグラムは提案段階です。将来的に変更されるかもしれません。**__
+[[http://forum.plantuml.net|新しいシンタックス案の提案]]を歓迎します！よりよい形を模索するのに、あなたからの意見や提案が役に立ちます！！
+
+===== ライフライン =====
+ライフラインは、 ''concise'' か ''robust'' で定義できます。
+''concise'' は状態ライフラインを、 ''robust'' は汎用値ライフラインを、それぞれ作成します。
+
+''@'' と ''is'' を用いて、状態の変化を記述できます。
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+
+@100
+WU is 待機
+WB is 処理中
+
+@300
+WB is 待機
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+
+@100
+WU is 待機
+WB is 処理中
+
+@300
+WB is 待機
+</uml>
+</columns>
+
+===== メッセージ（相互作用） =====
+
+メッセージは、矢印構文を使います。
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+
+@100
+WU -> WB : URL
+WU is 待機
+WB is 処理中
+
+@300
+WB is 待機
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+
+@100
+WU -> WB : URL
+WU is 待機
+WB is 処理中
+
+@300
+WB is 待機
+</uml>
+</columns>
+
+===== 相対時間での指定 =====
+
+''@'' で時間を指定するとき、相対的な時間の指定の仕方ができます。
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "DNS Resolver" as DNS
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+DNS is アイドル
+
+@+100
+WU -> WB : URL
+WU is 待機
+WB is 処理中
+
+@+200
+WB is 待機
+WB -> DNS@+50 : URL から IPアドレス を解決
+
+@+100
+DNS is 処理中
+
+@+300
+DNS is アイドル
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "DNS Resolver" as DNS
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+DNS is アイドル
+
+@+100
+WU -> WB : URL
+WU is 待機
+WB is 処理中
+
+@+200
+WB is 待機
+WB -> DNS@+50 : URL から IPアドレス を解決
+
+@+100
+DNS is 処理中
+
+@+300
+DNS is アイドル
+</uml>
+</columns>
+
+===== インスタンス指向 =====
+時系列順での定義ではなく、インスタンス毎（≒ライフライン毎）に定義できます。
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@WB
+0 is アイドル
++200 is 処理中
++100 is 待機
+
+@WU
+0 is 待機
++500 is ok
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+@WB
+0 is アイドル
++200 is 処理中
++100 is 待機
+
+@WU
+0 is 待機
++500 is ok
+</uml>
+</columns>
+
+===== スケールの設定 =====
+スケール（メモリの数値の表示）を指定できます。
+以下の例では、「メモリを 100ずつ 表示、1メモリの幅を 50px にする」設定になります。
+
+<columns 100% 50% ->
+<code>
+@startuml
+concise "ユーザ" as WU
+scale 100 as 50 pixels
+
+@WU
+0 is 待機
++500 is ok
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+concise "ユーザ" as WU
+scale 100 as 50 pixels
+
+@WU
+0 is 待機
++500 is ok
+</uml>
+</columns>
+
+===== 初期状態 =====
+「初期状態」を設定できます。
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+WB is 初期化中
+WU is 不在
+
+@WB
+0 is アイドル
++200 is 処理中
++100 is 待機
+
+@WU
+0 is 待機
++500 is ok
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+WB is 初期化中
+WU is 不在
+
+@WB
+0 is アイドル
++200 is 処理中
++100 is 待機
+
+@WU
+0 is 待機
++500 is ok
+</uml>
+</columns>
+
+===== 時間定規（time constraint）の追加 =====
+タイムラインのメモリとは別に、時間の尺度を示す矢印を表示することができます。
+
+<columns 100% 50% ->
+<code>
+@startuml
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+WB is 初期化中
+WU is 不在
+
+@WB
+0 is アイドル
++200 is 処理中
++100 is 待機
+WB@0 <-> @50 : {50 ms lag}
+
+@WU
+0 is 待機
++500 is ok
+@200 <-> @+150 : {150 ms}
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+robust "ウェブブラウザ" as WB
+concise "ユーザ" as WU
+
+WB is 初期化中
+WU is 不在
+
+@WB
+0 is アイドル
++200 is 処理中
++100 is 待機
+WB@0 <-> @50 : {50 ms lag}
+
+@WU
+0 is 待機
++500 is ok
+@200 <-> @+150 : {150 ms}
+</uml>
+</columns>
+
+===== タイトルなどを追加する =====
+（他の UML ダイアグラムと同様に）タイトル、ヘッダー／フッター、説明文、キャプション を書くことができます。
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+Title これはタイトル
+header: ここにヘッダーを書く
+footer: ここにフッターを書く
+legend
+図の説明は、ここに書きます。
+複数行かけますよ。
+end legend
+caption 一行の説明は、caption に書きましょう。
+
+robust "Web ブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+
+@100
+WU is 待機
+WB is 処理中
+
+@300
+WB is 待機
+@enduml
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+@startuml
+Title これはタイトル
+header: ここにヘッダーを書く
+footer: ここにフッターを書く
+legend
+図の説明は、ここに書きます。
+複数行かけますよ。
+end legend
+caption 一行の説明は、caption に書きましょう。
+
+robust "Web ブラウザ" as WB
+concise "ユーザ" as WU
+
+@0
+WU is アイドル
+WB is アイドル
+
+@100
+WU is 待機
+WB is 処理中
+
+@300
+WB is 待機
+@enduml
+
+</uml>
+</columns>

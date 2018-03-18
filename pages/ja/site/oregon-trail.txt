@@ -1,0 +1,105 @@
+<nodisp>TITLE: オレゴン・トレイルで遊ぶ</nodisp>
+<nodisp>DESC: オレゴン・トレイル は、1971年に作られたコンピュータゲームです。オリジナルのゲームは、19世紀のオレゴン・トレイルの開拓者たちの生活を、学校の子供達に教育するためにつくられました。</nodisp>
+
+
+====== オレゴン・トレイル ======
+
+[[https://ja.wikipedia.org/wiki/オレゴン・トレイル_(ゲーム)|Oregon Trail]] は、1971年に作られた、古典的なゲームです。
+
+[[http://www.atariarchives.org/bca|デイビット・アル]] のバージョン(
+[[http://www.atariarchives.org/bca/Chapter02_WestwardHo.php|ウェストワード・ホー!]]とも言う)が、Java にも移植され、 **PlantUML** でも遊ぶことができます。
+
+This page is dedicated to:
+  * Dan Rawitsch
+  * Bill Heinemann
+  * Paul Dillenberger
+  * David Ahl
+
+===== 遊んでみる =====
+ゲームを起動するには、 ''RUN'' コマンドを使用します。
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+</uml>
+</columns>
+
+入力は、すべてソースファイルに追加します。
+
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+150
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+150
+</uml>
+</columns>
+
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+150
+100
+10
+40
+40
+4
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+150
+100
+10
+40
+40
+4
+</uml>
+</columns>
+
+狩り（hunt）をするには、可能な限り素早く ''Type: '' に表示されたものを入力する必要があります。
+（オリジナルのバージョンと同じルールになっています！）
+
+（訳者注：入力はコードに書かれている必要があるため、事実上、hunt になったら詰みだです。）
+
+<columns 100% 50% ->
+<code>
+@startuml
+run oregon trail
+150
+100
+10
+40
+40
+3
+1
+blam
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+run oregon trail
+150
+100
+10
+40
+40
+3
+1
+blam
+</uml>
+</columns>
+
+Good luck to you on the //Oregon Trail// !

@@ -1,0 +1,69 @@
+**TITLE**: Use of Openiconic
+
+**DESC**: OpenIconic icons have been integrated into PlantUML and its creole parser. You can use them out-of-the-box to decorate your UML diagrams.
+
+
+====== OpenIconic ======
+
+[[https://useiconic.com/open/|OpenIconic]] is an very nice open source icon set.
+Those icons have been integrated into the [[creole|creole parser]], so you can use them out-of-the-box.
+
+You can use the following syntax: ''<&ICON_NAME>''.
+
+<columns 100% 50% ->
+<code>
+@startuml
+title: <size:20><&heart>Use of OpenIconic<&heart></size>
+class Wifi
+note left
+  Click on <&wifi>
+end note
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+title: <size:20><&heart>Use of OpenIconic<&heart></size>
+class Wifi
+note left
+  Click on <&wifi>
+end note
+</uml>
+</columns>
+
+
+It also works with [[salt|salt, the graphical interface designer]].
+<columns 100% 50% ->
+<code>
+@startsalt
+{
+  Login<&person> | "MyName   "
+  Password<&key> | "****     "
+  [Cancel <&circle-x>] | [OK <&account-login>]
+}
+@endsalt
+</code>
+<newcolumn>
+<uml type=salt title="Salt example">
+{
+  Login<&person> | "MyName   "
+  Password<&key> | "****     " 
+  [Cancel <&circle-x>] | [OK <&account-login>]
+}
+</uml>
+</columns>
+
+The complete list is available on [[https://useiconic.com/open/|OpenIconic Website]], or
+you can use the following special diagram:
+
+<code>
+@startuml
+listopeniconic
+@enduml
+</code>
+
+<uml title="foo">
+listopeniconic
+</uml>
+
+
+

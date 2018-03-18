@@ -1,0 +1,28 @@
+<nodisp>TITLE: Quick Start Guide</nodisp>
+<nodisp>DESC: You will learn how to quickly start using PlantUML.</nodisp>
+
+====== PlantUML for the impatient ======
+
+The easiest and quickest way of testing PlantUML is to use one online solution that embedded it. For example, you can use the [[http://www.plantuml.com/plantuml|online server]].
+
+===== Local installation =====
+
+Once you've got the idea, you may install locally PlantUML. ([[faq-install|There is a page dedicated on installation here]])
+
+You must have //Java// installed on your machine, and optionally [[graphviz-dot|Graphviz software]] which are used for all diagrams but sequence diagrams and activity beta diagrams.
+
+Then you can then download the jar file [[http://sourceforge.net/projects/plantuml/files/plantuml.jar/download|plantuml.jar]], and save it on your local disk.
+
+An easy way of testing your installation is [[gui|to launch the GUI by double-clicking on the JAR file]].
+
+You can also [[running|include PlantUML into your own scripts or documentation tools]]:
+
+  - Make a file containing PlantUML commands, either with an editor or when running other software which calls PlantUML.\\ Here is a file called ''sequenceDiagram.txt'':<code>
+@startuml
+Alice -> Bob: test
+@enduml
+</code>
+  - Run (or have the software call) PlantUML with this file as input. The output is an image, which either appears in the other software, or is written to an image file on disk.\\ For example,<code>
+java -jar plantuml.jar sequenceDiagram.txt
+</code>
+and the result is a nice diagram in ''sequenceDiagram.png''...

@@ -1,0 +1,51 @@
+<nodisp>TITLE: Support of XMI</nodisp>
+<nodisp>DESC: XML is a XML format that theorically allows to interchange data between programs. PlantUML provides alpha support for XMI files, for basic interoperability with ArgoUML and StarUML.</nodisp>
+
+====== XMI ======
+
+> [[http://www.quotationspage.com/quote/473.html|The nice thing about standards is that there are so many of them to choose from.]] //Andrew S. Tanenbaum//
+
+Many users ask for [[http://en.wikipedia.org/wiki/XML_Metadata_Interchange|XMI]]
+support in PlantUML. So the ''-xmi'' flag has been added in the
+command line (and in the ANT task also), for betatesting. This is only
+working with class diagrams.
+
+As explain on the [[http://modeling-languages.com/|Modeling Portal]], XMI [[http://modeling-languages.com/blog/content/xmi-nightmares-argouml-xmi-format-change|theorically]]
+allows to interchange data between programs.
+
+So let's have a very simple example, with three classes:
+<columns 100% 50% ->
+<code>
+@startuml
+class class1 {
+  field
+}
+class1 - class2
+class2 - class3
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+class class1 {
+  field
+}
+class1 - class2
+class2 - class3
+</uml>
+</columns>
+Imagine that you can have a XMI file that allows to import this on
+severals UML tools. It would be nice.
+
+Unfortunalty, having the very same file is difficult. For
+example,
+  * On [[http://staruml.sourceforge.net/en|StarUML]], you have to use [[testStarUML.xml|testStarUML.xmi]]
+  * On [[http://argouml.tigris.org|ArgoUML]], you have to use [[testArgoUML.xml|testArgoUML.xmi]]
+If someone manages to have an identical file that would work on both
+tools, please post it there : **you will have a free licence of PlantUML :-)**
+
+So, they are actually 3 flags:
+  * ''-xmi'' : only classes are exported, without any relationship. This is very basic but should work with on many tools
+  * ''-xmi:argo'' : to be read by [[http://argouml.tigris.org|ArgoUML]]
+  * ''-xmi:star'' : to be read by [[http://staruml.sourceforge.net/en|StarUML]]
+Please note that this is an alpha version, and that many things will probably not work. [[http://forum.plantuml.net/|You should use the forum to ask for corrections.]]
+

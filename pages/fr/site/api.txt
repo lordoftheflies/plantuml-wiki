@@ -1,0 +1,55 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Intégration avec du code Java</nodisp>
+<nodisp>DESC: You can use PlantUML as a library from your Java software. It's a nice and easy way to generate UML diagrams from your code, using dynamic generated Strings.</nodisp>
+
+
+===== Appeler PlantUML depuis du Java =====
+Il est facile d'intégrer **PlantUML** avec votre propre code en rajoutant //plantuml.jar// dans votre classpath.
+
+===== Génération d'image PNG depuis une chaîne de caractères =====
+Si votre description de diagrammes est stockée dans une ''String'', vous pouvez utiliser la classe ''SourceStringReader'' pour générer un fichier PNG.
+
+<code>
+OutputStream png = ...;
+String source = "@startuml\n";
+source += "Bob -> Alice : hello\n";
+source += "@enduml\n";
+
+SourceStringReader reader = new SourceStringReader(source);
+// Write the first image to "png"
+String desc = reader.generateImage(png);
+// Return a null string if no generation
+</code>
+
+===== Génération d'image PNG depuis un fichier =====
+Si votre description de diagrammes est stockée dans un ''File'', vous pouvez utiliser la classe ''SourceFileReader'' pour générer un fichier PNG.
+
+<code>File source = ...;
+SourceFileReader reader = new SourceFileReader(source);
+List<GeneratedImage> list = reader.getGeneratedImages();
+// Generated files
+File png = list.get(0).getPngFile();
+
+</code>
+
+===== Génération d'image SVG depuis une chaîne de caractères =====
+Si votre description de diagrammes est stockée dans une ''String'', vous pouvez utiliser la classe ''SourceStringReader'' pour générer un fichier SVG.
+
+
+<code>
+String source = "@startuml\n";
+source += "Bob -> Alice : hello\n";
+source += "@enduml\n";
+
+SourceStringReader reader = new SourceStringReader(source);
+final ByteArrayOutputStream os = new ByteArrayOutputStream();
+// Write the first image to "os"
+String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+os.close();
+
+// The XML is stored into svg
+final String svg = new String(os.toByteArray(), Charset.forName("UTF-8"));
+</code>
+
+

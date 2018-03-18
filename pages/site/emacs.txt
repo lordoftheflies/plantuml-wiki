@@ -1,0 +1,33 @@
+<nodisp>TITLE: Integration with Emacs</nodisp>
+<nodisp>DESC: You can use PlantUML with Emacs org-mode. It is also possible to edit, render, preview PlantUML diagrams from Emacs.</nodisp>
+
+There are several ways to use PlantUML and Emacs together :
+
+===== Emacs =====
+[[http://twitter.com/lucagreco|Luca Greco]] has started a set of
+[[http://gist.github.com/547521|helpers to edit, render, preview PlantUML code from Emacs]].
+
+===== Org-Babel =====
+[[http://orgmode.org/worg/org-contrib/babel|Org-Babel]] now
+supports [[http://eschulte.github.com/babel-dev/DONE-integrate-plantuml-support.html|blocks of plantuml code]].
+
+There is also an [[http://zhangweize.wordpress.com/2010/09/20/update-plantuml-mode|Emacs mode for PlantUML]]
+
+Thanks to [[http://zhangweize.wordpress.com/2010/08/25/creating-uml-images-by-using-plantuml-and-org-babel-in-emacs|Zhang Weize]] for adding this support.
+===== Emacs Org-Mode =====
+You can also use PlantUML with [[http://orgmode.org|Emacs org-mode]].
+
+You will find the needed macro at the following address [[http://www.emacswiki.org/emacs/IanYang|http://www.emacswiki.org/emacs/IanYang]]
+
+Once installed, embed PlantUML code in Emacs org-mode is used
+like this:
+<code>
+#+BEGIN_UML
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+#+END_UML
+</code>
+While the org file is exported to HTML or other formats, PlantUML is called to generate image and replace the block in place.
+
+Thanks to Ian Yang for the work done.
+

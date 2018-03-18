@@ -1,0 +1,59 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Génération de fichier LaTeX</nodisp>
+<nodisp>DESC: PlantUML can generate LaTeX file thanks to Tikz package. Those files can be integrated in LaTeX with a better result than PNG files, because the generated images are scalable.</nodisp>
+
+====== LaTeX ======
+
+A partir de la version 7997, PlantUML peut générer les diagrammes [[http://en.wikipedia.org/wiki/LaTeX|au format LaTeX]] à l'aide [[http://en.wikipedia.org/wiki/Tikz|du package Tikz]].
+
+Il s'agit d'une version en bêta, certaines fonctionnalités se sont pas encore supportées. Nous ne voulons pas passer du temps sur des fonctionnalités inutilisées, donc nous attendons des utilisateurs [[http://forum.plantuml.net/1798/latex-tikz-support|qu'ils nous remontent les erreurs]].
+
+Vous avec simplement à rajouter l'option ''-tlatex'' dans [[command-line|la ligne de commande]] ou bien de spécifier ''format="latex"'' dans la description [[ant-task|de la tâche ANT]] correspondante.
+
+====== Exemple de diagramme de classe ======
+
+<columns 100% 50% ->
+<code>
+@startuml
+class Subscriber {
+  subscriberId
+}
+
+class AccumUsage {
+  subscriberId
+}
+
+class IpSession {
+  ipAddress
+  specificData 
+  sapcOriginStateId 
+  apnId
+}
+
+Subscriber "1" -[#blue]-> "1..*" IpSession
+Subscriber "1" --> "0..1" AccumUsage
+@enduml
+</code>
+<newcolumn>
+{{:site:tikz01.png?nolink|}}
+</columns>
+
+[[https://www.writelatex.com/read/pgkkspzgzgpb|Voir le résultat en ligne]]
+
+====== Exemple de diagramme de sequence ======
+
+<columns 100% 50% ->
+<code>
+@startuml
+Bob -> Alice: hello
+return Ok
+@enduml
+</code>
+<newcolumn>
+{{:site:tikz02.png?nolink|}}
+</columns>
+
+[[https://www.writelatex.com/read/vmrvxnvzytbr|Voir le résultat en ligne]]
+
+

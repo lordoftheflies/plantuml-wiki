@@ -1,0 +1,72 @@
+<nodisp>TITLE: Integration of Dot diagrams</nodisp>
+<nodisp>DESC: Graphviz/Dot is a nice open source graph visualization software. It take descriptions of graphs in a simple text language. Dot syntax has been integrated into PlantUML.</nodisp>
+
+====== Generalisation ======
+Up to now, diagrams descriptions have to start with ''@startuml'' and to finish with ''@enduml''.
+**PlantUML** will allow in some future to generate other diagrams than UML, and in that cases,
+''@startuml'' would not make sense anymore.
+
+So, the general convention is changed to let diagrams descriptions start with ''@startXXX''
+and to finish with ''@endXXX'', where ''XXX'' has to be changed with the type of diagrams.
+Of course, ''XXX'' is changed ''uml'' for all existing diagrams, so that compatibility is not break.
+
+Note that ''XXX'' could be any strings of characters.
+
+This means that plugin developers are encouraged to change their code to recognize ''@start'' instead of ''@startuml''
+
+====== DOT ======
+
+Since **PlantUML** uses [[http://www.graphviz.org/Gallery.php|Graphviz/DOT]],
+it is possible to directly use DOT language.
+
+
+This means that you can use Graphviz/DOT with all tools that support **PlantUML**.
+
+Note that the very first line has to be: ''digraph XXXX {''
+You can also use ''@startuml/@enduml'' instead of ''@startdot/@enddot''.
+
+Here is a working example:
+<columns 100% 50% ->
+<code>
+@startuml
+digraph foo {
+  node [style=rounded]
+  node1 [shape=box]
+  node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
+  node3 [shape=record, label="{ a | b | c }"]
+
+  node1 -> node2 -> node3
+}
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+digraph foo {
+  node [style=rounded]
+  node1 [shape=box]
+  node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
+  node3 [shape=record, label="{ a | b | c }"]
+
+  node1 -> node2 -> node3
+}
+</uml>
+</columns>
+
+<columns 100% 50% ->
+<code>
+@startuml
+digraph foo {
+ PlantUML -> Dot [label=use];
+}
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+digraph foo {
+ PlantUML -> Dot [label=use];
+}
+</uml>
+</columns>
+
+Only PNG generation is supported now.
+

@@ -1,0 +1,22 @@
+<nodisp>TITLE: call it from your own Groovy software</nodisp>
+<nodisp>DESC: You can use PlantUML as a library from Groovy. It's a nice and easy way to generate UML diagrams from your code, using dynamic generated Strings.</nodisp>
+
+====== Groovy ======
+
+Since calling Java from [[http://groovy.codehaus.org|Groovy]] is pretty simple, the only thinks to do is to copy [[http://sourceforge.net/projects/plantuml/files/plantuml.jar/download|PlantUML.jar]] file to the [[http://groovy.codehaus.org/Running#Running-Addingthingstotheclasspath|classpath]] (for exemple, ''../Groovy/Groovy-1.7.6/lib'' directory).
+
+
+The following script print the current PlantUML version, and encode a URL:
+<code>
+println net.sourceforge.plantuml.version.Version.version() println
+net.sourceforge.plantuml.code.TranscoderUtil.getDefaultTranscoder().encode("Bob->Alice:hello")
+</code>
+
+If you want to generate an image from a description:
+<code>
+s = new net.sourceforge.plantuml.SourceStringReader("@startuml\nBob->Alice:hello\n@enduml")
+FileOutputStream file = new FileOutputStream("c:/testGroovy2.png")
+s.generateImage(file);
+file.close()
+</code>
+

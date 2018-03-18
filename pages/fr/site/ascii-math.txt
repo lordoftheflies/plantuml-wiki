@@ -1,0 +1,85 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Syntaxe mathématique pour écrire des formules</nodisp>
+<nodisp>DESC: You can integrate mathematical expressions using AsciiMath format. Useful for demonstration or algorithm details.</nodisp>
+
+====== Introduction ======
+
+Vous pouvez utiliser les notations [[http://asciimath.org|AsciiMath]] ou [[https://github.com/opencollab/jlatexmath|JLaTeXMath]] dans PlantUML:
+
+<code>
+@startuml
+:<math>int_0^1f(x)dx</math>;
+:<math>x^2+y_1+z_12^34</math>;
+note right
+Essayer aussi:
+<math>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</math>
+<latex>P(y|\mathbf{x}) \mbox{ ou } f(\mathbf{x})+\epsilon</latex>
+end note
+@enduml
+</code>
+
+<uml>
+:<math>int_0^1f(x)dx</math>;
+:<math>x^2+y_1+z_12^34</math>;
+note right
+Essayer aussi:
+<math>d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h</math>
+<latex>P(y|\mathbf{x}) \mbox{ ou } f(\mathbf{x})+\epsilon</latex>
+end note
+</uml>
+
+ou encore:
+
+
+<columns 100% 50% ->
+<code>
+@startuml
+Bob -> Alice : Peux-tu résoudre: <math>ax^2+bx+c=0</math>
+Alice --> Bob: <math>x = (-b+-sqrt(b^2-4ac))/(2a)</math>
+@enduml
+</code>
+<newcolumn>
+<uml>
+Bob -> Alice : Peux-tu résoudre: <math>ax^2+bx+c=0</math>
+Alice --> Bob: <math>x = (-b+-sqrt(b^2-4ac))/(2a)</math>
+</uml>
+</columns>
+
+====== Diagramme indépendant ======
+
+Il est possible d'utiliser ''@startmath''/''@endmath'' pour créer des formules [[http://asciimath.org|AsciiMath]].
+
+<code>
+@startmath
+f(t)=(a_0)/2 + sum_(n=1)^ooa_ncos((npit)/L)+sum_(n=1)^oo b_n\ sin((npit)/L)
+@endmath
+</code>
+
+<uml type=math>
+f(t)=(a_0)/2 + sum_(n=1)^ooa_ncos((npit)/L)+sum_(n=1)^oo b_n\ sin((npit)/L)
+</uml>
+
+Ou bien utiliser ''@startlatex''/''@endlatex'' pour créer des formules [[https://github.com/opencollab/jlatexmath|JLaTeXMath]].
+
+<columns 100% 50% ->
+<code>
+@startlatex
+\sum_{i=0}^{n-1} (a_i + b_i^2)
+@endlatex
+</code>
+<newcolumn>
+<uml type=latex>
+\sum_{i=0}^{n-1} (a_i + b_i^2)
+</uml>
+</columns>
+
+====== Comment cela fonctionne ? ======
+Pour dessiner ces formules, PlantUML utilise deux projets OpenSource:
+
+  * [[https://github.com/asciimath/asciimathml/tree/master/asciimath-based|AsciiMath]] qui convertit la notation AsciiMath vers une expression LaTeX.
+  * [[https://github.com/opencollab/jlatexmath|JLatexMath]] qui dessine une formule mathématique écrite en LaTeX. JLaTeXMath est le meilleur projet Java pour dessiner du code LaTeX.
+
+[[https://github.com/asciimath/asciimathml/blob/master/asciimath-based/ASCIIMathTeXImg.js|ASCIIMathTeXImg.js]] est suffisamment petit pour être intégré dans la distribution standard de PlantUML.
+
+Comme [[https://github.com/opencollab/jlatexmath|JLatexMath]] est plus gros, vous devez [[http://beta.plantuml.net/plantuml-jlatexmath.zip|le télécharger]] séparément, puis extraire les 4 fichiers (//batik-all-1.7.jar//, //jlatexmath-minimal-1.0.3.jar//, //jlm_cyrillic.jar// et //jlm_greek.jar//) dans le même répertoire que PlantUML.jar. 

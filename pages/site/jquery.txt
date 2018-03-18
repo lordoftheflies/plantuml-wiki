@@ -1,0 +1,72 @@
+<nodisp>TITLE: JQuery Integration</nodisp>
+<nodisp>DESC: You can put text diagram into your HTML pages, and use JQuery library to automatically parse your page and turn diagrams text into real image display.</nodisp>
+
+===== JQuery integration =====
+
+Imagine that you could directly use PlantUML source code into HTML, something like:
+
+<code>
+<html>
+<img uml="
+class foo
+">
+</html>
+</code>
+
+And that will display this:
+
+<uml>
+class foo
+</uml>
+
+This would be nice.
+
+
+Well, using [[http://jquery.com/|JQuery]] library, this will work.
+
+You just have to use the following header in your html file:
+
+<code>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="[[jquery_plantuml.js|jquery_plantuml.js]]"></script>
+<!-- rawdeflate.js is implicity used by jquery_plantuml.js -->
+</head>
+</code>
+
+
+The 3 files ''jquery.js'', ''jquery_plantuml.js'' and ''rawdeflate.js'' have
+to be available on your server.
+
+===== How does it works? =====
+There is nothing magic here:
+  * [[http://jquery.com/|JQuery]] simply parses the html source file on loading,
+  * Then all ''uml'' descriptions are transformed into links to [[http://www.plantuml.com|plantuml.com]] site. (like for [[code-javascript-asynchronous|Javascript integration]].)
+
+And you can [[http://sourceforge.net/projects/plantuml/files/jquery_plantuml.zip/download|download the complete package here]].
+
+===== Complete source example =====
+
+<code>
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="[[jquery_plantuml.js|jquery_plantuml.js]]"></script>
+<!-- rawdeflate.js is implicity used by jquery_plantuml.js -->
+</head>
+
+<body>
+<p>Example</p>
+<hr>
+<img uml="
+class foo
+">
+<hr>
+<img uml="
+class foo
+">
+
+</body>
+</html>
+</code>
+

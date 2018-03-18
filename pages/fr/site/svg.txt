@@ -1,0 +1,45 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Génération de fichier SVG</nodisp>
+<nodisp>DESC: PlantUML can generate images using SVG format. Those file can be integrated in LaTeX, HTML or PDF documents with a better result than PNG files, because SVG is a scalable format.</nodisp>
+
+====== Scalable Vector Graphics ======
+[[http://en.wikipedia.org/wiki/Scalable_Vector_Graphics|SVG]] est un format graphique qui est vectoriel. Cela signifie que si vous zoomez une image, vous avez toujours une bonne qualité d'image. Ce format donne de bon résultat lors de l'impression.
+
+Vous pouvez activez la génération SVG à l'aide de l'option ''-tsvg'' sur [[command-line|la ligne de commande]].
+
+Vous pouvez aussi utiliser ''format="svg"'' lors de [[ant-task|la définition d'une tâche ANT]].
+
+<code>
+<target name="main">
+  <plantuml dir="./src" format="svg" />
+</target>
+</code>
+
+Il est aussi possible de générer du SVG [[api|depuis un appel de code Java]].
+
+====== Paramètres SkinParameter ======
+
+Vous pouvez changer la valeur ''target'' dans le SVG généré grâce au paramètre ''svgLinkTarget''.
+
+<code>
+@startuml
+skinparam svgLinkTarget _parent
+start
+:[[http://plantuml.com]];
+stop
+@enduml
+</code>
+
+Il y a aussi un paramètre spécifique pour changer la couleur lorsque le pointeur de la souris survole les liens:
+
+<code>
+@startuml
+skinparam pathHoverColor green
+class Foo2 [[http://www.yahoo.com/Foo2]] {
+  +double[] x
+  +double y
+}
+Foo2 --> Foo3
+@enduml
+</code>

@@ -1,0 +1,41 @@
+<nodisp>**TITLE**: PlantUML テキストエンコード </nodisp>
+
+<nodisp>**DESC**: URL に使用できる文字だけで表現する、特別なエンコードフォーマットです。このフォーマットを使用すれば、PlantUML のコードを URL に含めることのできます。</nodisp>
+
+====== PTE（PlantUML テキスト エンコード）======
+
+PlantUML のコードは URL で使用可能な文字だけで表現したものに変換することができます。
+
+例えば、
+
+<code>
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+</code>
+
+は、
+
+<code>
+Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUS2W00
+</code>
+
+となります。
+
+このエンコードは、[[http://www.plantuml.com/plantuml/uml/Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUS2W00]] のように URL に使用することができます。
+
+この変換は、以下のように行われます。
+
+  - UTF-8 に変換
+  -  [[http://en.wikipedia.org/wiki/DEFLATE|Deflate]] アルゴリズムを用いて圧縮
+  - ASCII 文字列に再変換
+  - [[http://en.wikipedia.org/wiki/Base64|base64]] 表現にする
+
+
+PTE 表現は、 ''-encodeurl'' や ''-decodeurl'' を [[command-line|コマンドライン]] フラグをつけることで、使用できます。
+
+以下のコードでは、このエンコードを実際に使っています。
+
+
+  * [[code-php|Code in PHP]]
+  * [[code-javascript-synchronous|Code in Javascript]]
+

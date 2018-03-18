@@ -1,0 +1,58 @@
+<nodisp>TITLE: Integration with Eclipse</nodisp>
+<nodisp>DESC: When the PlantUML Eclipse plugin is installed, a new special view PlantUML is available and displays the image of any text diagram edited in real time within Eclipse</nodisp>
+
+
+===== Information about the PlantUML Eclipse Plugin =====
+
+
+The Eclipse Plugin is developped and maintened by
+[[http://www.ntnu.edu/employees/hal|Hallvard Trætteberg]]
+(many thanks for his work!).
+
+Like the core library PlantUML itself, it is //open source// and the plugin is distributed under EPL license.
+
+The source code [[https://github.com/hallvard/plantuml|is hosted on GitHub]].
+
+
+===== How to use it ? =====
+First, you have to display the //PlantUML View// (click the //Window// menu):
+
+{{:site:eclipse103.png?nolink|}}
+
+This view displays automatically the class you are working on:
+
+{{:site:eclipse104.png?nolink|}}
+
+If you write some comment in //PlantUML language//, the corresponding diagram is automatically displayed.
+And if you have several comments with diagrams, it selects the one the cursor is in.
+
+{{:site:eclipse105.png?nolink|}}
+
+In the //Preferences// Windows, you can also set up [[graphviz-dot|GraphViz path if needed]]:
+
+{{:site:eclipse107.png?nolink|}}
+
+
+===== How to install it ? =====
+
+
+To install the plugin, you have to:
+  * Go to **Help/Software Update/Find and install...** or **Help/Install new software...**
+  * Create (if needed) or choose the following site as update site:\\ ''http://files.idi.ntnu.no/publish/plantuml/repository/''\\ {{:site:eclipse101.png?nolink|}}
+  * Select PlantUML features:\\ {{:site:eclipse102.png?nolink|}}
+  * Restart Eclipse
+
+===== How to improve it ? =====
+
+The plugin is not limited to Java source file, it also works with //Ecore/////Xcore//
+files.
+
+So that you can see the corresponding class diagram in a view side-by-side the //Ecore/////Xcore//
+editor :
+
+{{:site:xwordfeud-plantuml.png?nolink|}}
+
+If you want to support other file types, you can implement a new extension to do so.
+You can have a look at
+[[https://github.com/hallvard/plantuml/tree/master/net.sourceforge.plantuml.xcore|the current xcore implementation]].
+

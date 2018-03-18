@@ -1,0 +1,16 @@
+<nodisp>TITLE: The current Svek architecture</nodisp>
+<nodisp>DESC: This page describes how PlantUML the use GraphViz/Dot when generating UML diagrams.</nodisp>
+
+===== Current architecture : Svek =====
+
+This current architecture (which codename is **Svek**) uses **Graphviz/Dot** to compute //nodes position//. The drawing itself is fully done in Java.
+
+The main advantage is that, since PlantUML does the drawing, the software is now less dependent of Graphviz/Dot.
+
+The code is also simpler, because the two steps (node computation //then// graphical rendering) are clearly separated.
+
+With this architecture, Graphviz/Dot generates a simplified SVG output
+(whatever is the actual output format need by the user), and those simplified SVG data are parsed by PlantUML.
+The drawing is then done by PlantUML.
+
+

@@ -1,0 +1,101 @@
+**TITLE**: Text Encoding format
+
+**DESC**: An special encoding format that contains only characters valid in URL has been defined. Using this format, it's possible to fully encode a short text description in an URL.
+
+====== PlantUML Text Encoding ======
+
+===== Introduction =====
+
+PlantUML defines a standardized way to encode diagram text description to a simple string of characters that contains only digits, letters, underscore and minus character.
+The goal of such an encoding is to facilitate communication of diagrams through URL (see [[server|server]]).
+This encoding includes compression to keep encoded strings as short as possible.
+
+The encoded metadata is stored in the generated PNG, so the diagram source can be extracted from the diagram itself!! (see [[server#metadata|server]]).
+===== Compression =====
+
+Two possible algorithms are available.
+The first one is the [[http://en.wikipedia.org/wiki/DEFLATE|Deflate algorithm]]. This compression gives good results for short diagrams. This was initially the only compression algorithm available.
+
+Starting from version 1.2017.20, PlantUML supports also [[https://en.wikipedia.org/wiki/Brotli|Brotli algorithm]] which gives usually better results than Deflate for larger diagrams. An initial ''0'' character is added to the encoded String to indicate that Brotli has to be used for decoding (Deflated data never starts by a ''0'').
+
+===== Principle =====
+
+For example, the following uml text description:
+
+<code>
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+</code>
+
+is encoded as:
+
+<code>
+Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUS2W00
+</code>
+
+To achieve such an encoding, the text diagram is:
+
+  - Encoded in UTF-8
+  - Compressed using [[http://en.wikipedia.org/wiki/DEFLATE|Deflate]] or [[https://en.wikipedia.org/wiki/Brotli|Brotli]] algorithm
+  - Reencoded in ASCII using a transformation //close// to [[http://en.wikipedia.org/wiki/Base64|base64]]
+
+===== Compression comparison =====
+
+The following diagram:
+
+<uml>
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequenceArrowColor DeepSkyBlue
+skinparam sequenceActorBorderColor DeepSkyBlue
+skinparam sequenceLifeLineBorderColor blue
+skinparam sequenceLifeLineBackgroundColor #A9DCDF
+skinparam sequenceParticipantBorderColor DeepSkyBlue
+skinparam sequenceParticipantBackgroundColor DodgerBlue
+skinparam sequenceParticipantFontName Impact
+skinparam sequenceParticipantFontSize 17
+skinparam sequenceParticipantFontColor #A9DCDF
+skinparam sequenceActorBackgroundColor aqua
+skinparam sequenceActorFontColor DeepSkyBlue
+skinparam sequenceActorFontSize 17
+skinparam sequenceActorFontName Aapex
+
+actor User
+participant "First Class" as ParticipantA
+participant "Second Class" as ParticipantB
+participant "Last Class" as ParticipantC
+
+User -> ParticipantA: DoWork
+activate ParticipantA
+
+ParticipantA -> ParticipantB: Create Request
+activate ParticipantB
+
+ParticipantB -> ParticipantC: DoWork
+activate ParticipantC
+ParticipantC --> ParticipantB: WorkDone
+destroy ParticipantC
+
+ParticipantB --> ParticipantA: Request Created
+deactivate ParticipantB
+
+ParticipantA --> User: Done
+deactivate ParticipantA
+</uml>
+
+is compressed to a
+
+  * [[http://www.plantuml.com/plantuml/uml/ZP4zRy8m48Pt_ueJdHawLMMe53iWLK9LLLHrFk8hM04xd9rI-kiR0u8a1CAG8SdpVja-DxP0nZNCCSiNx4ghbLivXeVnU2nJ9Vo9MABLMpOXa8N09OdQFq-Racn62RFR7WnIecAMx-Ig8Zl0B3YMZZNnFVZKV5UFfRfYteEs1oNFgKed7Oftv60oKw0DzpUgYrf9gTCBudxTnDdmXck2rtM1MUY7P-QFuF6f7-nRV3ZzLctSb7YDFPlUSQstgvwG_VG42_eL0kD7-FJ4eZXFWS74i0-WLkZz0D13RMVI96UKEQkxKTb4ftZDKmaHEy3mfP4qggxqot4UQveV3DJi8UflBQqSWMAAae-utuTE3zdma2qFTJDVrQKAXXVvKPawIq9NyUnshS7Du8lbnzh75ReowH-Gx7tYISRc--JEa_i7|428 string length using Deflate]]
+  * [[http://www.plantuml.com/plantuml/uml/06tq404I5ENsC6cXKT6xxgxaBDG3o_tzkTRbkDJuRa4mYLIoIEFVZsapwhAr5NDHB0jrZfWK5MOp8y53KKy_J2adzUr-HCAJ8bVfEA7x6qMwXhNtcUJYCT4gMZV_c2gzJk9gimqo81bOfXLN-tkYpiaWi3aabF_wrItuxPLX5NINL6FKhAboWjmXbI8jiBfIRnXs0h40re09D-HpekC83iDO8GEXFHTCMoPlXmKCx05mLK_fTdsZCJY1geDzQhs6aar6qIIfU1V5QYHQ5wvIFj8v6xZE0zWeZksK6S5mgnjDR9L1ao9uZg7-gFLepB1EeGVeUILgETgbkEtuAelaPmmGV7kEDjEioz1d6D_0WvvYzGbScBwP8CnA9ZosEQ2vGlBk_7W00|393 string length using Brotli]]
+
+
+===== Running =====
+
+You can use ''-encodeurl'' or ''-decodeurl'' in the [[command-line|command line]] flags to encode or decode the text. 
+
+You will find here some implementation of this encoder:
+
+  * [[code-php|Code in PHP]]
+  * [[code-javascript-synchronous|Code in Javascript]]
+

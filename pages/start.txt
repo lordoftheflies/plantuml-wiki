@@ -1,0 +1,18 @@
+====== Introduction ======
+
+**PlantUML** documentation is sometime out-of-date.
+
+So we have created this space so that people can contribute and improve online documentation.
+Modifications done here will be reported to [[http://plantuml.com|the official documentation]] after internal check.
+
+Note that we have also created a [[public/start|open and public space]] where you can also put everything that you want about **PlantUML**, how you use it, what improvement you are expecting...
+
+Finally, if you have specific questions, you can also use [[http://forum.plantuml.net|the existing forum]].
+
+When doing page creation or translation, please take care about:
+  * The first line of Dokuwiki code page should contains something like:\\ ''<nowiki><nodisp>TITLE: This is the title of the page.</nodisp></nowiki>'' \\ This is used to create the HTML title of the official website page. 
+  * The following line should contains something like:\\ ''<nowiki><nodisp>DESC: This is a short description of the page in less than 160 characters.</nodisp></nowiki>'' \\ This is used to populate the HTML tag ''<meta name="description">'' which is used by bot crawler to index the official website page.
+
+Thanks for your contribution!
+
+[[site/index|Go to main page now!]]

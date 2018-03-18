@@ -1,0 +1,23 @@
+**TITLE**: Special thanks to our sponsors and donors!
+
+**DESC**: PlantUML is opensource and free software. You can contribute and support us with any donation. Thanks again to all people that have helped us! This special command is for you.
+
+===== Special thanks to our sponsors and donors =====
+
+We would like to thanks [[http://sourceforge.net/donate/index.php?group_id=259736|our sponsors and donors]].
+
+So we dedicate some special command to them:
+<columns 100% 50% ->
+<code>
+@startuml
+donors
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+donors
+</uml>
+</columns>
+
+You can [[http://sourceforge.net/donate/index.php?group_id=259736|participate and enlarge the list !]] :-)
+

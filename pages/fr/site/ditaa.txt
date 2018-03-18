@@ -1,0 +1,126 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: Intégration de Ditaa</nodisp>
+<nodisp>DESC: Ditaa est un utilitaire écrit en Java, qui peut convertir des diagrammes dessiné en art ASCII. La syntaxe de Ditaa a été intégré dans PlantUML, vous pouvez donc avoir des diagrammes Ditaa depuis PlantUML.</nodisp>
+
+===== Généralisation =====
+
+À l'origine, les descriptions de diagrammes devaient commencer avec ''@startuml'' et finir avec ''@enduml''. **PlantUML** accepte maintenant de générer d'autres diagrammes que l'UML, et dans ce cas, ''@startuml'' n'a plus aucun sens.
+
+Donc, la convention générale est de laisser les descriptions de diagrammes commencer avec ''@startXXX'' et de finir avec ''@endXXX'', où ''XXX'' doit changer selon le type de diagrammes.
+
+Remarquez que ''XXX'' peut être n'importe quelle chaîne de caractères (espaces incluses).
+
+> Ceci veut dire que les développeurs de plugins sont encouragés à changer leur code afin de reconnaître ''@start'' au lieu de ''@startuml''.
+
+===== Ditaa =====
+
+[[http://ditaa.sourceforge.net|Ditaa]] est un projet open-source qui propose de générer des diagrammes venant de descriptions textuelles. L'idée se rapproche de **PlantUML**, et il peut être utile pour de la documentation en générant d'autres diagrammes que l'UML.
+
+La dernière version de **PlantUML** permet ceci : 
+
+
+
+<columns 100% 50% ->
+<code>
+@startditaa
++--------+   +-------+    +-------+
+|        +---+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+    :                         ^
+    |       Lots of work      |
+    +-------------------------+
+@endditaa
+</code>
+<newcolumn>
+<uml>
+ditaa
++--------+   +-------+    +-------+
+|        +---+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+    :                         ^
+    |       Lots of work      |
+    +-------------------------+
+</uml>
+</columns>
+
+Vous pourrez trouver [[http://ditaa.sourceforge.net|ici]] la documentation complète à propos de ceci.
+
+Si votre plugin ne supporte pas encore ''@startditaa'', une fonctionnalité //temporaire// a été mise en place : il est possible d'utiliser [[http://ditaa.sourceforge.net|Ditaa]] avec ''@startuml'' en utilisant le mot-clé ''ditaa'' à la toute première ligne de votre description.
+
+Vous pouvez également utiliser quelques options, après le mot-clé ''@startditaa'' ou ''@ditaa'' :
+
+  * ''-E'' ou ''--no-separation'' pour enlever les séparateurs
+  * ''-S'' ou ''--no-shadows'' pour enlever les ombres
+  * ''scale=XXX'' pour changer d'échelle le digramme
+
+<columns 100% 50% ->
+<code>
+@startuml
+ditaa(--no-shadows, scale=0.8)
+/--------\   +-------+
+|cAAA    +---+Version|
+|  Data  |   |   V3  |
+|  Base  |   |cRED{d}|
+|     {s}|   +-------+
+\---+----/
+@enduml
+</code>
+<newcolumn>
+<uml>
+ditaa(--no-shadows, scale=0.8)
+/--------\   +-------+
+|cAAA    +---+Version|
+|  Data  |   |   V3  |
+|  Base  |   |cRED{d}|
+|     {s}|   +-------+
+\---+----/
+</uml>
+</columns>
+
+Seule la génération en PNG est supportée.
+
+===== DOT =====
+
+Depuis que **PlantUML** utilise [[http://www.graphviz.org/Gallery.php|Graphviz/DOT]], Il est possible d'utiliser directement le langage DOT.
+Ce qui veut dire que vous pouvez utiliser Graphviz/DOT avec tous les outils que supporte **PlantUML**.
+
+Remarquez que la toute première ligne doit être :
+
+    digraph XXXX {
+
+Remarquez également que vous pouvez aussi utiliser ''@startuml''/''@enduml'' au lieu de ''@startdot''/''@enddot''.
+Voici un exemple fonctionnel : 
+
+<columns 100% 50% ->
+<code>
+@startdot
+digraph foo {
+  node [style=rounded]
+  node1 [shape=box]
+  node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
+  node3 [shape=record, label="{ a | b | c }"]
+
+  node1 -> node2 -> node3
+}
+@enddot
+</code>
+<newcolumn>
+<uml>
+digraph foo {
+  node [style=rounded]
+  node1 [shape=box]
+  node2 [fillcolor=yellow, style="rounded,filled", shape=diamond]
+  node3 [shape=record, label="{ a | b | c }"]
+
+  node1 -> node2 -> node3
+}
+</uml>
+</columns>
+    

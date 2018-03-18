@@ -1,0 +1,52 @@
+<nodisp>TITLE: XMIサポート</nodisp>
+<nodisp>DESC: XMI とは、XMLでプログラム間でメタデータをやり取りするための 標準規格です。PlantUML は、ArgoUML や StarUML と連携するために、XMI をベータサポートしてます。</nodisp>
+
+====== XMI ======
+
+> [[http://www.quotationspage.com/quote/473.html|望ましい「標準企画」とは、多くの人に選ばれ使われるようなものです。]] //Andrew S. Tanenbaum//
+
+多くのユーザから「[[http://en.wikipedia.org/wiki/XML_Metadata_Interchange|XMI]] サポートしてほしい」という要望が出ていました。
+そのため、ベータ版として、クラス図でのみ、コマンドラインから ''-xmi'' フラグ付きで試用できるようにしました。ANT タスクからも、同様に使うことができます。
+
+[[http://modeling-languages.com/|Modeling Portal]] による説明によると、
+XMI はXMLでプログラム間でメタデータをやり取りするための [[http://modeling-languages.com/blog/content/xmi-nightmares-argouml-xmi-format-change|標準的な]]規格です。
+
+例えば、以下のような「3つのクラスがある、クラス図」を XMI ファイルに出力すれば、他の UML ツールに同じクラス図をインポートすることができるはずです。
+<columns 100% 50% ->
+<code>
+@startuml
+class class1 {
+  field
+}
+class1 - class2
+class2 - class3
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+class class1 {
+  field
+}
+class1 - class2
+class2 - class3
+</uml>
+</columns>
+
+しかし、残念なことに、"まったく同じ"ファイルを使う、ということは難しいでしょう。
+なぜならば、
+  * [[http://staruml.sourceforge.net/en|StarUML]] なら、 [[testStarUML.xml|testStarUML.xmi]] のようなファイルである必要があります
+  * [[http://argouml.tigris.org|ArgoUML]] なら、 [[testArgoUML.xml|testArgoUML.xmi]] のようなファイルである必要があります
+
+もし、両方のツールを使っていて、同じようなファイルを複数管理するようなことをしているなら、次のような提案をしてみると良いでしょう。
+
+> PlantUML なら、フリーライセンスですよ :-)
+
+上記のような現実があるので、PlantUML では3つのフラグを提供しています。
+  * ''-xmi'' : クラス図のみ、クラス感のリレーション抜きの状態で出力できます。これは一番ベーシックな形式なので、多くのツールで使用できるでしょう。
+  * ''-xmi:argo'' : [[http://argouml.tigris.org|ArgoUML]] 用
+  * ''-xmi:star'' : [[http://staruml.sourceforge.net/en|StarUML]] 用
+
+====== 注意 ======
+この機能はアルファ版で、実用するには多くの問題があるでしょう。
+[[http://forum.plantuml.net/|なにかあれば、改善のためにフォーラムに情報を投稿をしてください。]]
+

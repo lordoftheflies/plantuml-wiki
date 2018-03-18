@@ -1,0 +1,51 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+<nodisp>TITLE: herramienta de código abierto que utiliza descripciones textuales simples para dibujar diagramas UML.</nodisp>
+<nodisp>DESC: Crea fácilmente diagramas UML desde la simple descripción textual. También hay numerosos tipos de diagramas disponibles. También es posible exportar imágenes en PNG, látex, EPS, SVG.</nodisp>
+
+====== PlantUML in a nutshell ======
+
+**PlantUML** es un proyecto Open Source (código abierto) que permite escribir rápidamente:
+
+  * [[sequence-diagram|Diagramas de Secuencia]]
+  * [[use-case-diagram|Diagramas de Casos de uso]]
+  * [[class-diagram|Diagramas de Clases]]
+  * [[activity-diagram-beta|Diagramas de Actividades]] (here is [[activity-diagram-legacy|the legacy syntax)]]
+  * [[component-diagram|Diagramas de Componentes]]
+  * [[state-diagram|Diagramas de Estados]]
+  * [[object-diagram|Diagramas de Objetos]]
+  * [[deployment-diagram|Deployment diagram]] {{:site:beta-icon.gif?nolink|}}
+  * [[timing-diagram|Timing diagram]] {{:site:beta-icon.gif?nolink|}}
+
+The following non-UML diagrams are also supported:
+
+  * [[salt|Wireframe graphical interface]]
+  * [[archimate-diagram|Archimate diagram]]
+  * [[activity-diagram-beta#sdl|Specification and Description Language (SDL)]]
+  * [[ditaa|Ditaa diagram]]
+  * [[gantt-diagram|Gantt diagram]] {{:site:beta-icon.gif?nolink|}}
+  * [[ascii-math|Mathematic with AsciiMath or JLaTeXMath notation]]
+
+Los diagramas son definidos usando un lenguaje simple e intuitivo. ([[http://translate.plantuml.com/es/PlantUML_Language_Reference_Guide_ES.pdf|Guía de Referencia del Lenguaje PlantUML]]).
+
+New users can read the [[starting|quick start page]]. There is also a [[faq|F.A.Q. page]]. PlantUML can be used within [[running|many other tools]].
+
+Images can be generated in PNG, [[svg|in SVG]] or [[latex|in LaTeX]] format. It is also possible to generate [[ascii-art|ASCII art diagrams]] (only for sequence diagrams).
+
+----
+
+**# online generations:**
+  * Since ever //4242424242//
+  * Last 24 hours //42424242//
+  * Last hour //4242//
+  * Last minute //42//
+
+^ __Example__: \\  //(You can edit the text if you want, the diagram will be dynamically updated!)// ^ __describes the following diagram :__^
+| ''Bob->Alice : hello''    | {{:site:syffkj2rkt3coknelr1io4zdosa70000.png?nolink|}}     |
+
+This example is working thanks to the [[http://www.plantuml.com/plantuml|online demo server]].
+
+----
+
+//Puede contribuir en esta página haciendo clic aquí.//
+

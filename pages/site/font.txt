@@ -1,0 +1,66 @@
+<nodisp>TITLE: Which fonts are available ?</nodisp>
+<nodisp>DESC: You can list all fonts available on your system, and use them with PlantUML. Be careful of portability if you want to use the same diagrams on several systems.</nodisp>
+
+====== Font ======
+To know fonts available on your system, you may use the following special syntax:
+
+<columns 100% 50% ->
+<code>
+@startuml
+listfonts
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+listfonts
+</uml>
+</columns>
+
+You can also add an optional sentence to be displayed:
+
+<columns 100% 50% ->
+<code>
+@startuml
+listfonts 私は申し訳ありません：私は日本語を話さない。
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+listfonts 私は申し訳ありません：私は日本語を話さない。
+</uml>
+</columns>
+
+
+===== Examples =====
+Those fontname can be used in any UML diagrams.
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam defaultFontName Segoe UI
+Room *-- Chair : "1" has "several"
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam defaultFontName Segoe UI
+Room *-- Chair : "1" has "several"
+</uml>
+</columns>
+
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam defaultFontName VL Gothic
+部屋 *-- 椅子 : "1" 持っています "いくつか"
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam defaultFontName VL Gothic
+部屋 *-- 椅子 : "1" 持っています "いくつか"
+</uml>
+</columns>
+
+You can also change font using [[skinparam|skinparam command]].
+

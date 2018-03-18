@@ -1,0 +1,395 @@
+**TITLE**: Utilisation du préprocesseur
+
+**DESC**: Le préprocesseur PlantUML fournit des fonctionnalités proches du préprocesseur C. Vous pouvez inclure des fichiers, définir des constantes et des macros. il est également possible d'utiliser des structures conditionnelles.
+
+====== Le préprocesseur ======
+
+Certains fonctionnalités de préprocesseur ont été incluses dans **PlantUML** et sont disponibles pour //tous// les diagrammes.
+
+Ces fonctionnalités sont très proche du [[http://en.wikipedia.org/wiki/C_preprocessor|préprocesseur du langage C ]], sauf que le caractère spécial ''#'' a été changé en point d'exclamation ''!''.
+===== Inclure des fichiers =====
+
+Il faut utiliser la directive ''!include'' pour inclure des fichiers dans votre diagramme.
+
+Par exemple, supposons que la même classes apparaît dans beaucoup de vos diagrammes. Plutôt que dupliquer la description de cette classe dans tous vos fichiers, vous pouvez créer un fichier unique qui contient cette description.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!include List.iuml
+List <|.. ArrayList
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+interface List
+List : int size()
+List : void clear()
+List <|.. ArrayList
+</uml>
+</columns>
+
+**File List.iuml**
+<code>
+interface List
+List : int size()
+List : void clear()
+</code>
+
+Le fichier ''List.iuml'' peut être inclus dans plusieurs diagrammes et lorsque ce fichier est modifié, tous les fichiers qui incluent celui-ci seront modifiés.
+
+Un fichier ne peut être inclus qu'une seule fois dans un fichier. Si vous voulez inclure plusieurs fois un fichier dans un même fichier, vous devez utiliser la directive ''!include_many'' en lieu de place de ''!include''.
+
+Vous pouvez aussi avoir plusieurs blocs ''@startuml/@enduml'' dans un fichier inclus et spécifier lors de l'inclusion le numéro du bloc que vous souhaitez inclure à l'aide de la syntaxe ''!0'' où ''0'' désigne le numéro du bloc.
+
+Par exemple, si vous utilisez ''!include foo.txt!1'', le second bloc ''@startuml/@enduml'' du fichier ''foo.txt'' sera inclus.
+
+Vous pouvez aussi utiliser un identifiant pour les blocs ''@startuml/@enduml'' à l'aide de la syntaxe ''@startuml(id=MY_OWN_ID)'' puis inclure le bloc concerné en précisant ''!MY_OWN_ID'' lors de l'inclusion du fichier, ce qui donne par exemple ''!include foo.txt!MY_OWN_ID''.
+
+===== Inclure des URL =====
+
+Vous pouvez utiliser la directive ''!includeurl'' pour inclure des fichiers depuis Internet ou depuis votre Intranet.
+
+Avec la syntaxe ''%%!includeurl http://someurl.com/mypath!0%%'' vous pouvez préciser quel bloc ''@startuml/@enduml'' issus de ''%%http://someurl.com/mypath%%'' vous souhaitez inclure. La notation ''!0'' désigne le premier bloc.
+===== Définition de constante =====
+Vous pouvez définir des constantes à l'aide de la directive ''!define''. Comme en C, le nom d'une constante ne peut contenir que des caractères alphanumériques et le caractère souligné sans commencer par un chiffre.
+
+<columns 100% 50% ->
+<code>
+@startuml
+
+!define SEQUENCE (S,#AAAAAA) Database Sequence
+!define TABLE (T,#FFAAAA) Database Table
+
+class USER << TABLE >>
+class ACCOUNT << TABLE >>
+class UID << SEQUENCE >>
+USER "1" -- "*" ACCOUNT
+USER -> UID
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+!define SEQUENCE (S,#AAAAAA) Database Sequence
+!define TABLE (T,#FFAAAA) Database Table
+
+class USER << TABLE >>
+class ACCOUNT << TABLE >>
+class UID << SEQUENCE >>
+USER "1" -- "*" ACCOUNT
+USER -> UID
+</uml>
+</columns>
+
+Bien sûr, vous pouvez utiliser la directive ''!include'' pour inclure toutes vos constantes depuis un seul fichier.
+
+Les constantes peuvent aussi être supprimées à l'aide de la directive ''!undef XXX''.
+
+Enfin, il est possible de définir des constantes sur la ligne de commande à l'aide de l'option ''-D''.
+
+<code>
+java -jar plantuml.jar -DTITLE="My title" atest1.txt
+</code>
+
+Notez que l'option ''-D'' doit être disposée après la partie "''-jar plantuml.jar''".
+
+===== Définition de macro =====
+Vous pouvez créer des macro prenant en entrée un ou plusieurs arguments.
+
+<columns 100% 50% ->
+<code>
+@startuml
+
+!define module(x) component x <<module>>
+module(ABC)
+module(XYZ)
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+!define module(x) component x <<module>>
+module(ABC)
+module(XYZ)
+</uml>
+</columns>
+
+Exemple avec plusieurs arguments:
+<columns 100% 50% ->
+<code>
+@startuml
+!define send(a,b,c) a->b : c
+send(Alice, Bob, Hello)
+send(Bob, Alice, ok)
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define send(a,b,c) a->b : c
+send(Alice, Bob, Hello)
+send(Bob, Alice, ok)
+</uml>
+</columns>
+
+===== Ajout de la date =====
+Vous pouvez aussi utiliser la date et l'heure courante à l'aide de la variable ''%date%''.
+
+Le format de date est spécifié dans la [[https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html|documentation de SimpleDataFormat]].
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define ANOTHER_DATE %date[yyyy.MM.dd 'at' HH:mm]%
+Title Generated %date% or ANOTHER_DATE
+alice -> bob
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define ANOTHER_DATE %date[yyyy.MM.dd 'at' HH:mm]%
+Title Generated %date% or ANOTHER_DATE
+alice -> bob
+</uml>
+</columns>
+
+===== Autres variables spéciales =====
+Il est possible d'utiliser les variables spéciales suivantes:
+
+^ Variable ^ Valeur ^
+| %dirpath% | Chemin du fichier courant |
+| %filename% | Nom du fichier courant |
+
+===== Macro sur plusieurs lignes =====
+Il est possible de définir une macro sur plusieurs lignes avec ''!definelong'' and ''!enddefinelong''.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+x -> y : DOUBLE(hello)
+y -> x : ok
+!enddefinelong
+
+AUTHEN(Bob,Alice)
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+x -> y : DOUBLE(hello)
+y -> x : ok
+!enddefinelong
+
+AUTHEN(Bob,Alice)
+</uml>
+</columns>
+
+===== Valeur par défaut pour les paramètres =====
+
+Il est possible de donner une valeur par défaut aux paramètres d'une macro.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define some_macro(x, y = "some default" , z = 'another default' ) x and y and z
+class foo {
+  some_macro(Z1, Z2, Z3)
+  some_macro(Z1, Z2)
+  some_macro(A)
+}
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define some_macro(x, y = "some default" , z = 'another default' ) x and y and z
+class foo {
+  some_macro(Z1, Z2, Z3)
+  some_macro(Z1, Z2)
+  some_macro(A)
+}
+</uml>
+</columns>
+
+
+===== Conditions =====
+Vous pouvez utiliser les directives ''!ifdef XXX'' et ''!endif'' pour avoir des dessins optionnels.
+
+Les lignes entre ceux deux directives ne seront incluses que si la constante indiquée après la directive ''!ifdef'' est bien définie.
+
+Il est possible d'avoir une partie ''!else'' qui sera incluse si la constante n'est **pas** définie.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!include ArrayList.iuml
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+class ArrayList
+!ifdef SHOW_METHODS
+ArrayList : int size()
+ArrayList : void clear()
+!endif
+</uml>
+</columns>
+**File ArrayList.iuml**:
+<code>
+class ArrayList
+!ifdef SHOW_METHODS
+class ArrayList {
+  int size()
+  void clear()
+}
+!endif
+</code>
+
+Vous pouvez dans ce cas utiliser la directive ''!define'' pour activer la partie conditionnelle du diagramme.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define SHOW_METHODS
+!include ArrayList.iuml
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+class ArrayList
+class ArrayList {
+  int size()
+  void clear()
+}
+</uml>
+</columns>
+
+La directive ''!if__n__def'' permet d'inclure une partie du diagramme si la constante précisée n'est PAS définie.
+
+Il est possible d'utiliser des expressions booléennes avec des parenthèses et les opérateurs ''&&'' / ''||'' dans la définition du test.
+<columns 100% 50% ->
+<code>
+@startuml
+!define SHOW_FIELDS
+!undef SHOW_METHODS
+class foo {
+!ifdef SHOW_FIELDS || SHOW_METHODS
+This is shown
+!endif
+!ifdef SHOW_FIELDS && SHOW_METHODS
+This is NOT shown
+!endif
+}
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define SHOW_FIELDS
+!undef SHOW_METHODS
+class foo {
+!ifdef SHOW_FIELDS || SHOW_METHODS
+This is shown
+!endif
+!ifdef SHOW_FIELDS && SHOW_METHODS
+This is NOT shown
+!endif
+}
+</uml>
+</columns>
+
+===== Chemin de recherche =====
+
+
+Vous pouvez spécifier la propriété java ''plantuml.include.path'' en ligne de commande.
+
+Par exemple :
+
+<code>
+java -Dplantuml.include.path="c:/mydir" -jar plantuml.jar atest1.txt
+</code>
+
+Remarquez l'argument -D qui doit être placé avant l'argument -jar. Les arguments -D après l'argument -jar seront utilisés pour définir les constantes au sein du préprocesseur plantuml
+
+===== Fonctionnalités avancées =====
+
+Il est possible d'ajouter du texte à un argument d'une macro en utilisant la syntaxe ''##''.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!definelong COMP_TEXTGENCOMP(name)
+[name] << Comp >>
+interface Ifc << IfcType >> AS name##Ifc
+name##Ifc - [name]
+!enddefinelong
+COMP_TEXTGENCOMP(dummy)
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!definelong COMP_TEXTGENCOMP(name)
+[name] << Comp >>
+interface Ifc << IfcType >> AS name##Ifc
+name##Ifc - [name]
+!enddefinelong
+COMP_TEXTGENCOMP(dummy)
+</uml>
+</columns>
+
+Une macro peut être définie par une autre macro.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+x -> y : DOUBLE(hello)
+y -> x : ok
+!enddefinelong
+AUTHEN(Bob,Alice)
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+x -> y : DOUBLE(hello)
+y -> x : ok
+!enddefinelong
+AUTHEN(Bob,Alice)
+</uml>
+</columns>
+
+Le polymorphisme peut s'appliquer à une macro sur le nombre d'arguments.
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define module(x) component x <<module>>
+!define module(x,y) component x as y <<module>>
+module(foo)
+module(bar, barcode)
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+!define module(x) component x <<module>>
+!define module(x,y) component x as y <<module>>
+module(foo)
+module(bar, barcode)
+</uml>
+</columns>
+
+Vous pouvez utiliser des variables d'environnement ou des définitions de constantes avec include :
+
+<code>
+!include %windir%/test1.txt
+!define PLANTUML_HOME /home/foo
+!include PLANTUML_HOME/test1.txt
+</code>
+
+
+
+

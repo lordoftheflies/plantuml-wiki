@@ -1,0 +1,37 @@
+FIXME **This page is not fully translated, yet. Please help completing the translation.**\\ //(remove this paragraph once the translation is finished)//
+
+**TITLE**: Choix des couleurs
+
+**DESC**: You can print all color names available in PlantUML and also display a palette of colors close to some predefine one.
+
+===== Couleurs=====
+Vous pouvez définir une couleur des façons suivantes:
+  * avec [[https://www.w3schools.com/colors/colors_names.asp|sa désignation standard]]
+  * avec une valeur hexadécimale ''#AABBCC''
+  * avec une valeur hexadécimale courte ''#ABC''
+
+Un utilisateur a récemment crée une image pour afficher [[https://github.com/sledgeh/PlantUML-colors|toutes les couleurs connues par PlantUML]]. (Un grand merci à lui!)
+
+En conséquence, une nouvelle fonctionnalité a été rajoutée pour afficher toutes les couleurs avec le diagramme suivant:
+<code>
+@startuml
+colors
+@enduml
+</code>
+<uml title="Toutes les couleurs">
+colors
+</uml>
+
+Il est aussi possible d'afficher une palette de couleurs proches d'une certaine couleur (en donnant son nom ou sa valeur hexadécimale).
+
+<code>
+@startuml
+colors chocolate
+@enduml
+</code>
+
+<uml title="Palette de couleur">
+colors chocolate
+</uml>
+
+

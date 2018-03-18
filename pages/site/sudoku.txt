@@ -1,0 +1,36 @@
+<nodisp>TITLE: Have a break with Sudoku</nodisp>
+<nodisp>DESC: Sometimes, it's good to have a break. You can use PlantUML to create some random Sudoku. It will help you to relax.</nodisp>
+
+====== Have a break ======
+
+Sometimes, when modeling, it's good to have a break....
+
+You can use **PlantUML** to create [[http://en.wikipedia.org/wiki/Sudoku|Sudoku]], like in the following example:
+
+<columns 100% 50% ->
+<code>
+@startuml
+sudoku
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+sudoku
+</uml>
+</columns>
+The sudoku is randomly generated.
+
+It is also possible to generate a specific [[http://en.wikipedia.org/wiki/Sudoku|Sudoku]] by providing its seed:
+
+<columns 100% 50% ->
+<code>
+@startuml
+sudoku 45azkdf4sqq
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+sudoku 45azkdf4sqq
+</uml>
+</columns>
+

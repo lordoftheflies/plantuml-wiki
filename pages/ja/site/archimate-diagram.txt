@@ -1,0 +1,238 @@
+<nodisp>TITLE: アーキテクチャ図</nodisp>
+<nodisp>DESC: アーキテクチャ図</nodisp>
+
+====== アーキテクチャ図 ======
+
+__現在、このダイアグラムは提案段階です。将来的に変更されるかもしれません。__
+
+[[http://forum.plantuml.net|新しいシンタックス案の提案]]を歓迎します！よりよい形を模索するのに、あなたからの意見や提案が役に立ちます！！
+
+===== アーキテクチャの要素 =====
+
+各要素は ''archimate'' で定義します。 
+
+ステレオタイプとして、アイコンを使うことができます。 使用できるアイコンの一覧は、[[#使用できるアイコン一覧|こちらを参照してください。]]
+
+[[https://www.w3schools.com/colors/colors_names.asp|HTMLのカラーネーム]]を使って、色の変更ができます。 また、いくつかのキーワード（''Business'', ''Application'', ''Motivation'', ''Strategy'', ''Technology'', ''Physical'', ''Implementation''）を使うこともできます。 
+
+<columns 100% 50% ->
+<code>
+@startuml
+archimate #Technology "VPN サーバ" as vpnServerA <<technology-device>>
+
+rectangle 実行 #lightgreen
+rectangle 終了 #red
+rectangle 待機 #orange
+@enduml
+</code>
+<newcolumn>
+<uml title="simple Archimate diagram">
+archimate #Technology "VPN サーバ" as vpnServerA <<technology-device>>
+
+rectangle 実行 #lightgreen
+rectangle 終了 #red
+rectangle 待機 #orange
+</uml>
+</columns>
+
+===== ジャンクション =====
+
+[[preprocessing|プリプロセス機能]]を使って ''circle'' を定義し、使用してください。
+
+<columns 100% 50% ->
+<code>
+@startuml
+!define Junction_Or circle #black
+!define Junction_And circle #whitesmoke
+
+Junction_And JunctionAnd
+Junction_Or JunctionOr
+
+archimate #Technology "VPN サーバ" as vpnServerA <<technology-device>>
+
+rectangle 実行 #lightgreen
+rectangle 終了 #red
+rectangle 待機 #orange
+実行 -up-> JunctionOr
+終了 -up-> JunctionOr
+終了 -down-> JunctionAnd
+待機 -down-> JunctionAnd
+@enduml
+</code>
+<newcolumn>
+<uml title="simple Archimate diagram">
+!define Junction_Or circle #black
+!define Junction_And circle #whitesmoke
+
+Junction_And JunctionAnd
+Junction_Or JunctionOr
+
+archimate #Technology "VPN サーバ" as vpnServerA <<technology-device>>
+
+rectangle 実行 #lightgreen
+rectangle 終了 #red
+rectangle 待機 #orange
+実行 -up-> JunctionOr
+終了 -up-> JunctionOr
+終了 -down-> JunctionAnd
+待機 -down-> JunctionAnd
+</uml>
+</columns>
+
+===== 複雑な例 =====
+
+<code>
+@startuml
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+rectangle "Handle claim"  as HC <<$bProcess>> #yellow 
+rectangle "Capture Information"  as CI <<$bProcess>> #yellow
+rectangle "Notify\nAdditional Stakeholders" as NAS <<$bProcess>> #yellow
+rectangle "Validate" as V <<$bProcess>> #yellow
+rectangle "Investigate" as I <<$bProcess>> #yellow
+rectangle "Pay" as P <<$bProcess>> #yellow
+
+HC *-down- CI
+HC *-down- NAS
+HC *-down- V
+HC *-down- I
+HC *-down- P
+
+
+CI -right->> NAS
+NAS -right->> V
+V -right->> I
+I -right->> P
+
+
+
+rectangle "Scanning" as scanning <<$aService>> #A9DCDF
+rectangle "Customer admnistration" as customerAdministration <<$aService>> #A9DCDF
+rectangle "Claims admnistration" as claimsAdministration <<$aService>> #A9DCDF
+rectangle Printing  <<$aService>> #A9DCDF
+rectangle Payment  <<$aService>> #A9DCDF
+
+scanning -up-> CI
+customerAdministration  -up-> CI
+claimsAdministration -up-> NAS
+claimsAdministration -up-> V
+claimsAdministration -up-> I
+Printing -up-> V
+Printing -up-> P
+Payment -up-> P
+
+rectangle "Document\nManagement\nSystem" as DMS <<$aComponent>> #A9DCDF
+rectangle "General\nCRM\nSystem" as CRM <<$aComponent>> #A9DCDF
+rectangle "Home & Away\nPolicy\nAdministration" as HAPA <<$aComponent>> #A9DCDF
+rectangle "Home & Away\nFinancial\nAdministration" as HFPA <<$aComponent>> #A9DCDF
+
+DMS .up.|> scanning
+DMS .up.|> Printing
+CRM .up.|> customerAdministration
+HAPA .up.|> claimsAdministration
+HFPA .up.|> Payment
+
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See 
+==
+<$bProcess> :business process
+==
+<$aSrv> : application service
+==
+<$aComp> : appplication component
+endlegend
+@enduml
+</code>
+
+<uml title="simple Archimate diagram">
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+rectangle "Handle claim"  as HC <<$bProcess>> #yellow 
+rectangle "Capture Information"  as CI <<$bProcess>> #yellow
+rectangle "Notify\nAdditional Stakeholders" as NAS <<$bProcess>> #yellow
+rectangle "Validate" as V <<$bProcess>> #yellow
+rectangle "Investigate" as I <<$bProcess>> #yellow
+rectangle "Pay" as P <<$bProcess>> #yellow
+
+HC *-down- CI
+HC *-down- NAS
+HC *-down- V
+HC *-down- I
+HC *-down- P
+
+
+CI -right->> NAS
+NAS -right->> V
+V -right->> I
+I -right->> P
+
+
+rectangle "Scanning" as scanning <<$aService>> #A9DCDF
+rectangle "Customer admnistration" as customerAdministration <<$aService>> #A9DCDF
+rectangle "Claims admnistration" as claimsAdministration <<$aService>> #A9DCDF
+rectangle Printing  <<$aService>> #A9DCDF
+rectangle Payment  <<$aService>> #A9DCDF
+
+scanning -up-> CI
+customerAdministration  -up-> CI
+claimsAdministration -up-> NAS
+claimsAdministration -up-> V
+claimsAdministration -up-> I
+Printing -up-> V
+Printing -up-> P
+Payment -up-> P
+
+rectangle "Document\nManagement\nSystem" as DMS <<$aComponent>> #A9DCDF
+rectangle "General\nCRM\nSystem" as CRM <<$aComponent>> #A9DCDF
+rectangle "Home & Away\nPolicy\nAdministration" as HAPA <<$aComponent>> #A9DCDF
+rectangle "Home & Away\nFinancial\nAdministration" as HFPA <<$aComponent>> #A9DCDF
+
+DMS .up.|> scanning
+DMS .up.|> Printing
+CRM .up.|> customerAdministration
+HAPA .up.|> claimsAdministration
+HFPA .up.|> Payment
+
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See 
+==
+<$bProcess> :business process
+==
+<$aSrv> : application service
+==
+<$aComp> : appplication component
+endlegend
+</uml>
+
+
+===== 例 2 =====
+
+<columns 100% 50% ->
+<code>
+@startuml
+rectangle "Capture Information"  as CI <<$archimate/business-process>> #yellow
+@enduml
+</code>
+<newcolumn>
+<uml title="simple Archimate diagram">
+rectangle "Capture Information"  as CI <<$archimate/business-process>> #yellow
+</uml>
+</columns>
+
+===== 使用できるアイコン一覧 =====
+
+アーキテクチャ図で使用できるアイコンの一覧は、次のコードで表示することができます。
+
+<code>
+listsprite
+</code>
+
+<uml title="simple Archimate diagram">
+listsprite
+</uml>

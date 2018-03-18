@@ -1,0 +1,201 @@
+**TITLE**: General and common command to handle graphic layout in diagrams.
+
+**DESC**: It is possible to add footer and header to your UML diagrams, with many layout options. You can also define zoom level to generate thumbnail for your diagrams.
+
+====== Common commands ======
+
+===== Comments =====
+Everything that starts with ''%%simple quote '%%'' is a
+comment.
+
+You can also put comments on several lines using ''%%/'%%'' to start and ''%%'/%%'' to end.
+
+===== Footer and header =====
+You can use the commands ''header'' or ''footer'' to
+add a footer or a header on any generated diagram.
+
+You can optionally specify if you want a ''center'', ''left''
+or ''right'' footer/header, by adding a keyword.
+
+As for title, it is possible to define a header or a footer on
+several lines.
+
+It is also possible to put some HTML into the header or footer.
+<columns 100% 50% ->
+<code>
+@startuml
+Alice -> Bob: Authentication Request
+
+header
+<font color=red>Warning:</font>
+Do not use in production.
+endheader
+
+center footer Generated for demonstration
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+Alice -> Bob: Authentication Request
+
+header
+<font color=red>Warning:</font>
+Do not use in production.
+endheader
+
+center footer Generated for demonstration
+
+</uml>
+</columns>
+
+===== Zoom =====
+
+You can use the ''scale'' command to zoom the generated image.
+
+You can use either a number or a fraction to define the scale factor.
+You can also specify either width or height (in pixel).
+And you can also give both width and height : the image is scaled to fit inside the specified dimension.
+
+  * ''scale 1.5''
+  * ''scale 2/3''
+  * ''scale 200 width''
+  * ''scale 200 height''
+  * ''scale 200*100''
+  * ''scale max 300*200''
+  * ''scale max 1024 width''
+  * ''scale max 800 height''
+
+<columns 100% 50% ->
+<code>
+@startuml
+scale 180*90
+Bob->Alice : hello
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+scale 180*90
+Bob->Alice : hello
+</uml>
+</columns>
+
+
+===== Title =====
+The ''title'' keywords is used to put a title.
+You can add newline using ''\n'' in the title description.
+
+Some skinparam settings are available to put borders on the title.
+<columns 100% 50% ->
+<code>
+@startuml
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor Aqua-CadetBlue
+
+title Simple communication\nexample
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor Aqua-CadetBlue
+
+title Simple communication\nexample
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+</uml>
+</columns>
+
+You can use [[creole|creole formatting]] in the title.
+
+You can also define title on several lines using ''title''
+and ''end title'' keywords.
+<columns 100% 50% ->
+<code>
+@startuml
+
+title
+ <u>Simple</u> communication example
+ on <i>several</i> lines and using <back:cadetblue>creole tags</back>
+end title
+
+Alice -> Bob: Authentication Request
+Bob -> Alice: Authentication Response
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+title
+ <u>Simple</u> communication example
+ on <i>several</i> lines and using <back:cadetblue>creole tags</back>
+end title
+
+Alice -> Bob: Authentication Request
+Bob -> Alice: Authentication Response
+
+</uml>
+</columns>
+
+===== Caption =====
+There is also a ''caption'' keyword to put a caption under the diagram.
+<columns 100% 50% ->
+<code>
+@startuml
+
+caption figure 1
+Alice -> Bob: Hello
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+caption figure 1
+Alice -> Bob: Hello
+
+</uml>
+</columns>
+
+===== Legend the diagram =====
+
+The ''legend'' and ''end legend'' are keywords is used to put a legend.
+
+You can optionally specify to have ''left'', ''right'' or ''center''
+alignment for the legend.
+<columns 100% 50% ->
+<code>
+@startuml
+
+Alice -> Bob : Hello
+legend right
+  Short
+  legend
+endlegend
+
+@enduml
+</code>
+<newcolumn>
+<uml title="foo">
+
+Alice -> Bob : Hello
+legend right
+  Short
+  legend
+endlegend
+
+</uml>
+</columns>
+
+

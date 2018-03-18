@@ -1,0 +1,162 @@
+<nodisp>TITLE: Integration with Doxygen documentation tool</nodisp>
+<nodisp>DESC: You can integrate PlantUML and Doxygen. If you put some PlantUML diagrams into your source code, the corresponding images will be generated and included in your documentation.</nodisp>
+
+====== Doxygen ======
+
+You can use [[http://www.doxygen.org|Doxygen]] and PlantUML
+together to integrate UML diagrams into generated documentation :
+
+{{:site:doxygen_doc_example.png?nolink|}}
+
+===== Defining aliases =====
+
+Doxygen does not understand the ''@startuml'' and ''@enduml'' tags, and will generate errors if you use them in comments.
+You can surround them by HTML comments to have Doxygen ignore them (see below for an example).
+However, you can also define Doxygen aliases in your Doxyfile for ''@startuml'' and ''@enduml'',
+so that HTML comments are not necessary:
+
+<code>
+ALIASES = "startuml=\if DontIgnorePlantUMLCode"
+ALIASES += "enduml=\endif"
+</code>
+
+This will have Doxygen ignore everything in-between ''@startuml'' and ''@enduml''
+//unless// the token 'DontIgnorePlantUMLCode' is defined, which of course isn't.
+
+
+You can even go one step further:
+Doxygen supports arguments in aliases, with the syntax ''@startuml{some argument}''.
+This means you can generate the \image commands automatically:
+
+<code>
+ALIASES = "startuml{1}=\image html \1\n\image latex \1\n\if DontIgnorePlantUMLCode"
+ALIASES += "enduml=\endif"
+</code>
+
+Now, you can just do:
+
+<code>
+@startuml
+.. PlantUML code
+@enduml
+</code>
+
+
+Starting with version 7560, PlantUML will recognize ''@startuml{myfilename.png}''
+as ''@startuml myfilename.png''  or ''@startuml "myfilename.png"''
+
+===== Batch example (for Windows) =====
+
+The following batch file is called for each source directory :
+<code>
+...
+:: parameter %1 is the source directory
+:: parameter %2 is the image output directory
+
+:: set tools
+SET GRAPHVIZ_DOT=d:\Programme\Dev\graphviz\bin\dot.exe
+SET DOXYGEN_EXE=d:\Programme\Dev\doxygen\doxygen.exe
+SET PLANTUML_JAR=d:\Programme\Dev\plantuml\plantuml.jar
+
+:: set source dir
+SET SOURCE_DIR=%1
+
+:: set image output folder for plantuml / image source folder for doxygen
+SET DOC_IMG_PATH=%2
+
+:: change to source dir and save old dir on stack
+PUSHD "%SOURCE_DIR%"
+
+:: call plantuml.jar for current dir
+java -jar %PLANTUML_JAR% -v -o "%DOC_IMG_PATH%" "./**.(c|cpp|doc|h)"
+
+:: call doxygen for current dir (doxyfile)
+%DOXYGEN_EXE% doxyfile
+
+:: change to saved dir
+POPD
+...
+
+</code>
+Additionally inside doxyfile the configuration value for image folder
+(for ''@image'' command) is assigned:
+<code>
+...
+IMAGE_PATH = $(DOC_IMG_PATH)
+...
+
+</code>
+
+===== Batch example (for Linux) =====
+
+<code>
+#!/bin/sh
+# Create *.png files from text @startuml code and output *.png images to ./doc-src/images folder
+# Recusively search from current folder scanning *.c, *.cpp, *.h, and *.doc files
+java  -Djava.awt.headless=true -jar $PLANTUML_JAR -v -o $PWD/doc-src/images  "./**.(c|cpp|doc|h)"
+doxygen
+</code>
+
+===== C Source example (Using alias) =====
+
+Here is an example how the comment is used for plantuml and doxygen in C
+source file:
+<code>
+...
+/*!
+* @brief This function sends compute requests to
+* ZipComp-Task and waits for response:
+*
+* @startuml{ZipCmd_ZipComp_Communication.png}
+*
+* ZipCmd -> ZipComp: First Compute Request
+* ZipCmd <-- ZipComp: First Compute Response
+*
+* ZipCmd -> ZipComp: Second Compute Request
+* ZipCmd <-- ZipComp: Second Compute Response
+*
+* @enduml
+*
+* @return some value on success.
+*/
+unsigned int ZipCmd_ZipComp_Communication(unsigned short command, unsigned
+char *buffer);
+...
+
+</code>
+
+===== C Source example (Old version) =====
+
+Here is an example how the comment is used for plantuml and doxygen in C
+source file:
+<code>
+...
+/*!
+* @brief This function sends compute requests to
+* ZipComp-Task and waits for response:
+* @image html ZipCmd_ZipComp_Communication.png
+*
+* <!-- Hide plantuml commands from Doxygen inside comment.
+*  Note: Use of the Doxygen tag command to hide code in 1.7.3 will hide the Doxygen docs that follow.
+*  Warning: Don't replaced plantuml commands '@' with '\' - it won't work.
+* @startuml ZipCmd_ZipComp_Communication.png
+*
+* ZipCmd -> ZipComp: First Compute Request
+* ZipCmd <-- ZipComp: First Compute Response
+*
+* ZipCmd -> ZipComp: Second Compute Request
+* ZipCmd <-- ZipComp: Second Compute Response
+*
+* @enduml
+* -->
+*
+* @return some value on success.
+*/
+unsigned int ZipCmd_ZipComp_Communication(unsigned short command, unsigned
+char *buffer);
+...
+
+</code>
+'' @image'' is used in doxygen to include an image in documentation. The image file name must be the same is used after ''@startuml''
+command (here: ZipCmd_ZipComp_Communication.png).
+

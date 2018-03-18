@@ -1,0 +1,182 @@
+<nodisp>TITLE: Syntaxe et caractéristiques des diagrammes de Gantt</nodisp>
+<nodisp>DESC: Syntaxe pour les diagrammes de Gantt: Le support est encore partiel. Ceci est une proposition de syntaxe qui est susceptible d'évoluer.</nodisp>
+
+====== Diagramme de Gantt ======
+
+__La syntaxe proposée n'est qu'une suggestion et est susceptible d'évoluer__.
+
+Vous êtes invités à [[http://forum.plantuml.net|créer des discussions]] sur cette future syntaxe. Vos retours, vos idées et vos suggestions nous aideront à trouver la meilleure solution.
+
+Le Gantt doit être décrit en anglais, à l'aide de phrase très simple (sujet-verbe-complément).
+
+===== Définir des tâches =====
+
+Les tâches sont définies à l'aide des crochets. Leur durée est défini à l'aide du verbe ''last''.
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Design du prototype] lasts 15 days
+[Test du prototype] lasts 10 days
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Design du prototype] lasts 15 days
+[Test du prototype] lasts 10 days
+</uml>
+</columns>
+
+===== Ajout de contraintes =====
+Il est possible de rajouter des contraintes entre les tâches.
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Design du prototype] lasts 15 days
+[Test du prototype] lasts 10 days
+[Test du prototype] starts at [Design du prototype]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Design du prototype] lasts 15 days
+[Test du prototype] lasts 10 days
+[Test du prototype] starts at [Design du prototype]'s end
+</uml>
+</columns>
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Design du prototype] lasts 10 days
+[Codage du prototype] lasts 10 days
+[Ecriture des tests] lasts 5 days
+[Codage du prototype] starts at [Design du prototype]'s end
+[Ecriture des tests] starts at [Codage du prototype]'s start
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Design du prototype] lasts 10 days
+[Codage du prototype] lasts 10 days
+[Ecriture des tests] lasts 5 days
+[Codage du prototype] starts at [Design du prototype]'s end
+[Ecriture des tests] starts at [Codage du prototype]'s start
+</uml>
+</columns>
+
+
+===== Noms courts =====
+Un nom court peut être utilisé pour les tâches à l'aide de l'instruction ''as''.
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Design du prototype] as [D] lasts 15 days
+[Test du prototype] as [T] lasts 10 days
+[T] starts at [D]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Design du prototype] as [D] lasts 15 days
+[Test du prototype] as [T] lasts 10 days
+[T] starts at [D]'s end
+</uml>
+</columns>
+
+
+===== Choix des couleurs =====
+Il est possible de changer les couleurs des tâches. 
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Design du prototype] lasts 13 days
+[Test du prototype] lasts 4 days
+[Test du prototype] starts at [Design du prototype]'s end
+[Design du prototype] is colored in Fuchsia/FireBrick 
+[Test du prototype] is colored in GreenYellow/Green 
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Design du prototype] lasts 13 days
+[Test du prototype] lasts 4 days
+[Test du prototype] starts at [Design du prototype]'s end
+[Design du prototype] is colored in Fuchsia/FireBrick 
+[Test du prototype] is colored in GreenYellow/Green 
+</uml>
+</columns>
+
+
+===== Jalon =====
+Vous pouvez définir des jalons à l'aide du verb ''happens''.
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[Test du prototype] lasts 10 days
+[Prototype terminé] happens at [Test du prototype]'s end
+[Mise en place production] lasts 12 days
+[Mise en place production] starts at [Test du prototype]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[Test du prototype] lasts 10 days
+[Prototype terminé] happens at [Test du prototype]'s end
+[Mise en place production] lasts 12 days
+[Mise en place production] starts at [Test du prototype]'s end
+</uml>
+</columns>
+
+
+===== Calendrier =====
+Vous pouvez définir une date de début pour l'ensemble du projet. Par défault, la première tâche commence à cette date.
+
+<columns 100% 50% ->
+<code>
+@startgantt
+Project starts the 20th of september 2017
+[Design du prototype] as [TASK1] lasts 13 days
+[TASK1] is colored in Lavender/LightBlue
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+Project starts the 20th of september 2017
+[Design du prototype] as [TASK1] lasts 13 days
+[TASK1] is colored in Lavender/LightBlue
+</uml>
+</columns>
+
+
+===== Exemple plus complexe =====
+On peut se servir de la conjonction de coordination ''and''.
+
+Il est aussi possible de spécifier un delai dans les contraintes. 
+
+<code>
+@startgantt
+[Design du prototype] lasts 13 days and is colored in Lavender/LightBlue
+[Test du prototype] lasts 9 days and is colored in Coral/Green and starts 3 days after [Design du prototype]'s end
+[Écriture des tests] lasts 5 days and ends at [Design du prototype]'s end
+[Embauche des rédacteurs] lasts 6 days and ends at [Écriture des tests]'s start
+[Écriture des rapports] is colored in Coral/Green
+[Écriture des rapports] starts 1 day before [Test du prototype]'s start and ends at [Test du prototype]'s end
+@endgantt
+</code>
+
+<uml title="simple UML timing diagram">
+[Design du prototype] lasts 13 days and is colored in Lavender/LightBlue
+[Test du prototype] lasts 9 days and is colored in Coral/Green and starts 3 days after [Design du prototype]'s end
+[Écriture des tests] lasts 5 days and ends at [Design du prototype]'s end
+[Embauche rédacteurs] lasts 6 days and ends at [Écriture des tests]'s start
+[Ecriture des rapports] is colored in Coral/Green
+[Ecriture des rapports] starts 1 day before [Test du prototype]'s start and ends at [Test du prototype]'s end
+</uml>
+
+
+

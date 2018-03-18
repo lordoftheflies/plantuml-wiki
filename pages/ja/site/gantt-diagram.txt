@@ -1,0 +1,183 @@
+<nodisp>TITLE: ガントチャート</nodisp>
+<nodisp>DESC: PlantUML ガントチャートの文法: ガントチャートはまだ完全にサポートされていません。提案段階（draft version）です。構文が変更される可能性があります。</nodisp>
+
+====== ガントチャート ======
+
+**__現在、このダイアグラムは提案段階です。将来的に変更されるかもしれません。__**
+
+ガントチャートは、「主語と動詞の組み合わせ」という、単純で自然な英語を書くように記述できます。
+
+===== タスクの定義 =====
+タスクは角カッコで定義します。期間は ''last'' で指定します。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[プロトタイプを設計] lasts 15 days
+[プロトタイプをテスト] lasts 10 days
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[プロトタイプを設計] lasts 15 days
+[プロトタイプをテスト] lasts 10 days
+@endgantt
+</uml>
+</columns>
+
+===== 依存関係 =====
+''start'' と ''end'' で、タスク間の依存関係を定義します。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[プロトタイプを設計] lasts 15 days
+[プロトタイプをテスト] lasts 10 days
+[プロトタイプをテスト] starts at [プロトタイプを設計]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[プロトタイプを設計] lasts 15 days
+[プロトタイプをテスト] lasts 10 days
+[プロトタイプをテスト] starts at [プロトタイプを設計]'s end
+</uml>
+</columns>
+
+複数のタスク同士をつなぐこともできます。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[プロトタイプを設計] lasts 10 days
+[プロトタイプを実装] lasts 10 days
+[テストを実装] lasts 5 days
+[プロトタイプを実装] starts at [プロトタイプを設計]'s end
+[テストを実装] starts at [プロトタイプを実装]'s start
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[プロトタイプを設計] lasts 10 days
+[プロトタイプを実装] lasts 10 days
+[テストを実装] lasts 5 days
+[プロトタイプを実装] starts at [プロトタイプを設計]'s end
+[テストを実装] starts at [プロトタイプを実装]'s start
+</uml>
+</columns>
+
+
+===== エイリアス =====
+''as'' で、タスクに短い名前（エイリアス）を定義できます。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[プロトタイプを設計] as [設計] lasts 15 days
+[プロトタイプをテスト] as [テスト] lasts 10 days
+[テスト] starts at [設計]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[プロトタイプを設計] as [設計] lasts 15 days
+[プロトタイプをテスト] as [テスト] lasts 10 days
+[テスト] starts at [設計]'s end
+</uml>
+</columns>
+
+
+===== 色の変更 =====
+''colored at'' で、色の変更ができます。
+色の指定には、[[https://www.w3schools.com/colors/colors_names.asp|HTMLのカラーネーム]]を使用します。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[プロトタイプを設計] lasts 13 days
+[テスト] lasts 4 days
+[テスト] starts at [プロトタイプを設計]'s end
+[プロトタイプを設計] is colored in Fuchsia/FireBrick 
+[テスト] is colored in GreenYellow/Green 
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[プロトタイプを設計] lasts 13 days
+[テスト] lasts 4 days
+[テスト] starts at [プロトタイプを設計]'s end
+[プロトタイプを設計] is colored in Fuchsia/FireBrick 
+[テスト] is colored in GreenYellow/Green 
+</uml>
+</columns>
+
+
+===== マイルストーン =====
+
+''happens'' でマイルストーンを定義できます。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+[プロトタイプをテスト] lasts 10 days
+[プロトタイプが完成] happens at [プロトタイプをテスト]'s end
+[製造ラインの準備] lasts 12 days
+[製造ラインの準備] starts at [プロトタイプをテスト]'s end
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+[プロトタイプをテスト] lasts 10 days
+[プロトタイプが完成] happens at [プロトタイプをテスト]'s end
+[製造ラインの準備] lasts 12 days
+[製造ラインの準備] starts at [プロトタイプをテスト]'s end
+</uml>
+</columns>
+
+
+===== 日付の表示 =====
+プロジェクトの開始日時に、特定の日付を指定できます。
+デフォルトでは、一番最初のタスクが指定した日付から開始します。
+
+<columns 100% 50% ->
+<code>
+@startgantt
+Project starts the 20th of september 2017
+[プロトタイプを設計] as [タスク1] lasts 13 days
+[タスク1] is colored in Lavender/LightBlue
+@endgantt
+</code>
+<newcolumn>
+<uml title="simple UML timing diagram">
+Project starts the 20th of september 2017
+[プロトタイプを設計] as [タスク1] lasts 13 days
+[タスク1] is colored in Lavender/LightBlue
+</uml>
+</columns>
+
+
+===== 複雑な例 =====
+1つのタスクに対して、 ''and'' で同時に複数の設定できます。
+
+依存する前提タスクを、後から追加することができます。
+
+<code>
+@startgantt
+[プロトタイプを設計] lasts 13 days and is colored in Lavender/LightBlue
+[プロトタイプをテスト] lasts 9 days and is colored in Coral/Green and starts 3 days after [プロトタイプを設計]'s end
+[テストを実装] lasts 5 days and ends at [プロトタイプを設計]'s end
+[テストプログラマの雇用] lasts 6 days and ends at [テストを実装]'s start
+[テストの実施] is colored in Coral/Green
+[テストの実施] starts 1 day before [プロトタイプをテスト]'s start and ends at [プロトタイプをテスト]'s end
+@endgantt
+</code>
+
+<uml title="simple UML timing diagram">
+[プロトタイプを設計] lasts 13 days and is colored in Lavender/LightBlue
+[プロトタイプをテスト] lasts 9 days and is colored in Coral/Green and starts 3 days after [プロトタイプを設計]'s end
+[テストを実装] lasts 5 days and ends at [プロトタイプを設計]'s end
+[テストプログラマの雇用] lasts 6 days and ends at [テストを実装]'s start
+[テストの実施] is colored in Coral/Green
+[テストの実施] starts 1 day before [プロトタイプをテスト]'s start and ends at [プロトタイプをテスト]'s end
+</uml>
+
